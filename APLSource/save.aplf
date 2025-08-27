@@ -1,0 +1,7 @@
+ save←{
+ ⍝ Saves iCalendar content to file
+ ⍝ 
+ ⍝ This utility function writes iCalendar data to a .ics file
+ ⍝ for local storage or testing purposes.
+     ⍵ ⎕NPUT'uwclasses.ics'
+ }

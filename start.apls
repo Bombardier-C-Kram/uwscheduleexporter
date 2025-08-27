@@ -1,0 +1,4 @@
+#!/bin/env dyalogscript
+⎕SE.(⍎⊃2⎕FIX'/StartupSession.aplf',⍨2⎕NQ#'GetEnvironment' 'DYALOG')
+⎕SE.Cider.OpenProject '.'
+uwscheduleexporter.start

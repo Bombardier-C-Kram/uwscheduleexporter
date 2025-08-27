@@ -1,0 +1,11 @@
+{
+  packageID: [
+    "dyalog-Jarvis-1.20.5",
+  ],
+  principal: [
+    1,
+  ],
+  url: [
+    "https://tatin.dev/",
+  ],
+}

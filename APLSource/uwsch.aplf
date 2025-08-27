@@ -1,0 +1,96 @@
+ r←uwsch schedule;a
+ ⍝ Parses University of Waterloo Quest class schedule text into structured data
+ ⍝ 
+ ⍝ This function takes raw text copied from a UW Quest class schedule page
+ ⍝ and converts it into a structured format suitable for calendar generation.
+ ⍝ 
+ ⍝ Args:
+ ⍝   schedule - Character vector containing the raw text from UW Quest schedule page
+ ⍝              Expected to contain course information and class details
+ ⍝ 
+ ⍝ Returns:
+ ⍝   r - Vector of namespaces, each representing a course with structure:
+ ⍝       .code        - Course code (e.g., 'ECE 150')
+ ⍝       .name        - Course name/title
+ ⍝       .status      - Enrollment status
+ ⍝       .units       - Number of credit units
+ ⍝       .grading     - Grading scheme
+ ⍝       .classes     - Vector of class namespaces, each with:
+ ⍝         .number      - Class number
+ ⍝         .section     - Section identifier
+ ⍝         .component   - Component type (LEC, LAB, TUT, etc.)
+ ⍝         .days        - Days of week (e.g., 'MWF')
+ ⍝         .starttime   - Start time (e.g., '08:30')
+ ⍝         .endtime     - End time (e.g., '09:20')
+ ⍝         .room        - Room location
+ ⍝         .instructor  - Instructor name
+ ⍝         .start       - Start date
+ ⍝         .end         - End date
+ ⍝ 
+ ⍝ Processing steps:
+ ⍝ 1. Extracts schedule content between specific markers
+ ⍝ 2. Splits into individual course sections
+ ⍝ 3. Parses course header information
+ ⍝ 4. Extracts and structures class details for each course
+
+ ⍝schedule←⊃⎕NGET'UWSchedule.txt'  ⍝ For testing with file input
+ ⍝ Step 1: Extract schedule content and split by course delimiter
+ a←(⎕UCS 10)(≠⊆⊢){¯47↓23↓⍵↓⍨'Show Waitlisted Classes'(⍸⍷)⍵}schedule
+ a←a⊂⍨0,⍨1↓(⊂'Status',(⎕UCS 9),'Units',(⎕UCS 9),'Grading',(⎕UCS 9),'Deadlines')⍷a
+ ⍝ a is the initial schedule parse - each element is one complete course
+
+ r←{
+     ⍝ Step 2: Process each course individually
+     ⍝ Create course namespace with basic structure
+     course←(
+         code:''        ⍝ Course code (e.g., 'ECE 150')
+         name:''        ⍝ Course title
+         status:''      ⍝ Enrollment status
+         units:0        ⍝ Credit units
+         grading:''     ⍝ Grading scheme
+         classes:⍬      ⍝ Vector of class sessions
+     )
+     ⍝ Parse course header: extract code and name from first line
+     course.(code name)←{(⊂⍵↑⍨2-⍨b),⊂⍵↓⍨1+b←⍵⍳'-'}⊃⍵
+     course.status←3⊃⍵      ⍝ Extract status from 3rd field
+     course.units←⊃2⊃⎕VFI 4⊃⍵  ⍝ Parse units as number
+     course.grading←5⊃⍵     ⍝ Extract grading scheme
+
+     ⍝ Step 3: Extract class details section
+     b←⍵↓⍨(⊂'Class Nbr',(⎕UCS 9),'Section',(⎕UCS 9),'Component',(⎕UCS 9),'Days & Times',(⎕UCS 9),'Room',(⎕UCS 9),'Instructor',(⎕UCS 9),'Start/End Date')(⍸⍷)⍵
+     ⍝ Handle multi-line entries by merging continuation lines
+     idx←⍸','=⊃¨⌽¨b
+     b[idx]←↓(↑b[idx]),' ',(↑b[idx+1])
+     b←0~⍨(0@(idx+1))b
+     
+     ⍝ Define class structure template
+     class←(
+         number:0       ⍝ Class number
+         section:''     ⍝ Section identifier  
+         component:''   ⍝ Component type (LEC, LAB, TUT, etc.)
+         days:''        ⍝ Days of week
+         starttime:''   ⍝ Start time
+         endtime:''     ⍝ End time
+         room:''        ⍝ Room location
+         instructor:''  ⍝ Instructor name
+         start:''       ⍝ Start date
+         end:''         ⍝ End date
+     )
+ ⍝course.code≡'ECE 150':÷0  ⍝ Debug breakpoint for specific course
+     ⍝ Step 4: Parse class data into structured format
+     ⍝ Convert tab-separated data into matrix, handling 7 columns per class
+     cv←↑7{⍵⊂[1]⍨(≢⍵)⍴⍺↑1}{⍵~(⎕UCS 9)}¨b
+     ⍝ Clean up first three columns (remove empty entries)
+     cv[;1 2 3]←⍉↑{(cv[;⍵]~(⊂,' '))[+\~{(,' ')≡⍵}¨cv[;⍵]]}¨1 2 3
+     ⍝ Create namespace for each class
+     classes←{⎕NS class}¨⍳≢cv
+     ⍝ Step 5: Populate class data fields
+     classes.number←⊃¨(↑⎕VFI¨cv[;1])[;2]  ⍝ Parse class numbers
+     classes.(section component room instructor)←↓cv[;2 3 5 6]  ⍝ Direct assignments
+     ⍝ Parse start/end dates
+     classes.(start end)←{(⊂⍵↑⍨2-⍨b),⊂⍵↓⍨1+b←⍵⍳'-'}¨cv[;7]
+     ⍝ Parse days and times from combined field
+     classes.(days starttime endtime)←{{⌽(⊂2⊃⍵),(⊂b↓⊃⍵),⊂(⊃⍵)↑⍨¯1+b←' '⍳⍨⊃⍵}{(⊂⍵↑⍨2-⍨b),⊂⍵↓⍨1+b←⍵⍳'-'}⍵}¨cv[;4]
+     course.classes←classes
+     course
+ }¨a

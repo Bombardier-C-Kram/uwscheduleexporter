@@ -1,0 +1,149 @@
+⍝ Web Interface Namespace for UW Schedule Exporter
+⍝ This namespace handles HTTP requests and provides the web interface
+⍝ for parsing University of Waterloo class schedules and converting them to iCalendar format
+:Namespace web
+
+      ∇ r←Index req
+      ⍝ HTTP GET handler for the main index page
+      ⍝ Args: req - HTTP request object from Jarvis web server
+      ⍝ Returns: HTML content for the main application page
+          r←GetHTML'index'
+      ∇
+      
+      ∇ r←req ProcessSchedule _;schedule;summary;description
+      ⍝ HTTP POST handler for processing schedule data
+      ⍝ Args: req - HTTP request object containing JSON payload with:
+      ⍝   - schedule: Raw text from UW Quest class schedule page
+      ⍝   - summary: Template string for calendar event summaries
+      ⍝   - description: Template string for calendar event descriptions
+      ⍝ Returns: iCalendar (.ics) file content as text
+      ⍝ Side effects: Sets HTTP response headers for file download
+          ⍝ Handle POST request with schedule data - return iCal directly
+          schedule←req.Payload.schedule
+          summary←req.Payload.summary
+          description←req.Payload.description
+          r←summary description ##.ical ##.uwsch schedule
+          ⍝ Set headers to trigger file download
+          req.Response.Headers←4 2⍴'Content-Type' 'text/calendar; charset=utf-8' 'Content-Disposition' 'attachment; filename="schedule.ics"' 'Cache-Control' 'no-store' 'Content-Length' (⍕≢r)
+      ∇
+      
+      ∇ html←GetHTML page
+      ⍝ Generates HTML content for specified pages
+      ⍝ Args: page - string identifier for the page to generate
+      ⍝ Returns: Complete HTML document as character vector
+          :Select page
+          :Case 'index'
+              html←IndexPage
+          :EndSelect
+      ∇
+      
+      ∇ html←IndexPage
+      ⍝ Generates the main application page HTML
+      ⍝ Creates a complete HTML document with:
+      ⍝ - Form for pasting UW Quest schedule text
+      ⍝ - Template inputs for customizing event summaries and descriptions
+      ⍝ - Instructions for users
+      ⍝ - JavaScript for handling form submission and file download
+      ⍝ Returns: Complete HTML page as character vector
+          html←'<!DOCTYPE html>'
+          html,←'<html lang="en">'
+          html,←'<head>'
+          html,←'    <meta charset="UTF-8">'
+          html,←'    <meta name="viewport" content="width=device-width, initial-scale=1.0">'
+          html,←'    <title>UW Schedule Exporter</title>'
+          html,←'    <style>'
+          html,←'        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }'
+          html,←'        .container { background: #f5f5f5; padding: 30px; border-radius: 8px; }'
+          html,←'        h1 { color: #333; text-align: center; }'
+          html,←'        .form-group { margin-bottom: 20px; }'
+          html,←'        label { display: block; margin-bottom: 5px; font-weight: bold; }'
+          html,←'        textarea { width: 100%; height: 300px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: monospace; }'
+          html,←'        input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: monospace; }'
+          html,←'        button { background: #007cba; color: white; padding: 12px 24px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }'
+          html,←'        button:hover { background: #005a87; }'
+          html,←'        .instructions { background: #e7f3ff; padding: 15px; border-radius: 4px; margin-bottom: 20px; }'
+          html,←'        .status { margin-top: 20px; padding: 10px; border-radius: 4px; display: none; }'
+          html,←'        .status.success { background: #d4edda; color: #155724; }'
+          html,←'        .status.error { background: #f8d7da; color: #721c24; }'
+          html,←'    </style>'
+          html,←'</head>'
+          html,←'<body>'
+          html,←'    <div class="container">'
+          html,←'        <h1>UW Schedule Exporter</h1>'
+          html,←'        <div class="instructions">'
+          html,←'            <h3>How to use:</h3>'
+          html,←'            <p>1. Login at <a href="https://quest.pecs.uwaterloo.ca/psp/SS/?cmd=login" target="_blank">https://quest.pecs.uwaterloo.ca/psp/SS/?cmd=login</a></p>'
+          html,←'            <p>2. Click <strong>Class Schedule</strong></p>'
+          html,←'            <p>3. Copy the whole page by pressing <strong>Ctrl+A</strong> and then <strong>Ctrl+C</strong></p>'
+          html,←'            <p>4. Come back here and paste everything into the text field by pressing <strong>Ctrl+V</strong></p>'
+          html,←'            <p>5. Customize the summary and description templates (optional)</p>'
+          html,←'            <p>6. Click "Process Schedule" to parse and export your schedule</p>'
+          html,←'            <p>7. Use the iCalendar file to import your schedule into any calendar software such as Google Calendar, Outlook, etc.</p>'
+          html,←'            <p><strong>Template variables:</strong> @code, @section, @name, @type, @location, @prof</p>'
+          html,←'        </div>'
+          html,←'        <form id="scheduleForm">'
+          html,←'            <div class="form-group">'
+          html,←'                <label for="summary">Summary Template:</label>'
+          html,←'                <input type="text" id="summary" name="summary" value="@code @type in @location" placeholder="@code @type in @location">'
+          html,←'            </div>'
+          html,←'            <div class="form-group">'
+          html,←'                <label for="description">Description Template:</label>'
+          html,←'                <input type="text" id="description" name="description" value="@code-@section: @name (@type) in @location with @prof" placeholder="@code-@section: @name (@type) in @location with @prof">'
+          html,←'            </div>'
+          html,←'            <div class="form-group">'
+          html,←'                <label for="schedule">Paste your UW schedule here:</label>'
+          html,←'                <textarea id="schedule" name="schedule" placeholder="Paste your schedule text here..." required></textarea>'
+          html,←'            </div>'
+          html,←'            <button type="submit">Process Schedule</button>'
+          html,←'        </form>'
+          html,←'        <div id="status" class="status"></div>'
+          html,←'    </div>'
+          html,←'    <script>'
+          html,←'        document.getElementById("scheduleForm").addEventListener("submit", async function(e) {'
+          html,←'            e.preventDefault();'
+          html,←'            const scheduleText = document.getElementById("schedule").value;'
+          html,←'            const summaryTemplate = document.getElementById("summary").value;'
+          html,←'            const descriptionTemplate = document.getElementById("description").value;'
+          html,←'            const statusDiv = document.getElementById("status");'
+          html,←'            '
+          html,←'            statusDiv.className = "status";'
+          html,←'            statusDiv.innerHTML = "Processing schedule...";'
+          html,←'            statusDiv.style.display = "block";'
+          html,←'            '
+          html,←'            try {'
+          html,←'                const response = await fetch("/ProcessSchedule", {'
+          html,←'                    method: "POST",'
+          html,←'                    headers: {'
+          html,←'                        "Content-Type": "application/json"'
+          html,←'                    },'
+          html,←'                    body: JSON.stringify({ schedule: scheduleText, summary: summaryTemplate, description: descriptionTemplate })'
+          html,←'                });'
+          html,←'                '
+          html,←'                if (response.ok) {'
+          html,←'                    const blob = await response.blob();'
+          html,←'                    const url = window.URL.createObjectURL(blob);'
+          html,←'                    const a = document.createElement("a");'
+          html,←'                    a.style.display = "none";'
+          html,←'                    a.href = url;'
+          html,←'                    a.download = "schedule.ics";'
+          html,←'                    document.body.appendChild(a);'
+          html,←'                    a.click();'
+          html,←'                    window.URL.revokeObjectURL(url);'
+          html,←'                    document.body.removeChild(a);'
+          html,←'                    '
+          html,←'                    statusDiv.className = "status success";'
+          html,←'                    statusDiv.innerHTML = "&#10004; Schedule processed and downloaded successfully!";'
+          html,←'                } else {'
+          html,←'                    throw new Error("Server error: " + response.status);'
+          html,←'                }'
+          html,←'            } catch (error) {'
+          html,←'                statusDiv.className = "status error";'
+          html,←'                statusDiv.textContent = "Error: " + error.message;'
+          html,←'                statusDiv.style.display = "block";'
+          html,←'            }'
+          html,←'        });'
+          html,←'    </script>'
+          html,←'</body>'
+          html,←'</html>'
+      ∇
+:EndNamespace
