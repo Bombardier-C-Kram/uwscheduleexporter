@@ -24,7 +24,7 @@
           description←req.Payload.description
           r←summary description ##.ical ##.uwsch schedule
           ⍝ Set headers to trigger file download
-          req.Response.Headers←4 2⍴'Content-Type' 'text/calendar; charset=utf-8' 'Content-Disposition' 'attachment; filename="schedule.ics"' 'Cache-Control' 'no-store' 'Content-Length' (⍕≢r)
+          req.Response.Headers←3 2⍴'Content-Type' 'text/calendar; charset=utf-8' 'Content-Disposition' 'attachment; filename="schedule.ics"' 'Cache-Control' 'no-store'
       ∇
       
       ∇ html←GetHTML page
