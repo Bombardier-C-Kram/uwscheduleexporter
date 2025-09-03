@@ -1,4 +1,4 @@
-FROM dyalog/techpreview:20.0
+FROM dyalog/techpreview:20.0-beta4
 
 # Install curl for health checks
 USER root
