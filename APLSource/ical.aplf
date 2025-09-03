@@ -33,8 +33,8 @@
              isampm←{⍵∘{+/⍺⍷⍨⍵}¨'AM' 'PM'}
              ampm←isampm ⍵.starttime
              badtime←0 0≢ampm
-             ⍵.starttime←⊃((⊂⍵.starttime),⊂{add12←~2-⍸ispmam ⍵ ⋄ ∊{(⍕⍺),':',(⍕⍵)}/(((12×12≢⊃a)×add12),0)+a←2⊃':'⎕VFI¯2↓⍵}⍵.starttime)[1+badtime]
-             ⍵.endtime←⊃((⊂⍵.endtime),⊂{add12←~2-⍸ispmam ⍵ ⋄ ∊{(⍕⍺),':',(⍕⍵)}/(((12×12≢⊃a)×add12),0)+a←2⊃':'⎕VFI¯2↓⍵}⍵.endtime)[1+badtime]
+             ⍵.starttime←⊃((⊂⍵.starttime),⊂{add12←~2-⍸isampm ⍵ ⋄ ∊{(⍕⍺),':',(⍕⍵)}/(((12×12≢⊃a)×add12),0)+a←2⊃':'⎕VFI¯2↓⍵}⍵.starttime)[1+badtime]
+             ⍵.endtime←⊃((⊂⍵.endtime),⊂{add12←~2-⍸isampm ⍵ ⋄ ∊{(⍕⍺),':',(⍕⍵)}/(((12×12≢⊃a)×add12),0)+a←2⊃':'⎕VFI¯2↓⍵}⍵.endtime)[1+badtime]
 
              ⍝ Calculate start date adjustment for day of week
              ⍝ Map day abbreviations to numeric offsets and find the earliest
