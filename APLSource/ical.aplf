@@ -1,17 +1,17 @@
  ical←{
  ⍝ Generates iCalendar (.ics) format from structured course data
- ⍝ 
+ ⍝
  ⍝ This function takes parsed course data and custom templates to create
  ⍝ a standards-compliant iCalendar file for importing into calendar applications.
- ⍝ 
+ ⍝
  ⍝ Left argument (⍺):
  ⍝   summary desc - Two-element vector containing template strings:
  ⍝     summary  - Template for event titles (supports variables)
  ⍝     desc     - Template for event descriptions (supports variables)
- ⍝ 
+ ⍝
  ⍝ Right argument (⍵):
  ⍝   Vector of course namespaces from uwsch function
- ⍝ 
+ ⍝
  ⍝ Template variables (replaced in summary and description):
  ⍝   @code     - Course code (e.g., 'ECE 150')
  ⍝   @section  - Section identifier
@@ -19,10 +19,10 @@
  ⍝   @type     - Component type (LEC, LAB, TUT, etc.)
  ⍝   @location - Room location
  ⍝   @prof     - Instructor name
- ⍝ 
+ ⍝
  ⍝ Returns:
  ⍝   Complete iCalendar file content as character vector
-      
+
      summary desc←⍺
      body←{
          ⍵{
@@ -30,20 +30,25 @@
              ⍵.starttime≡'':''
              ⍝ Apply template variable substitution
              summary desc←(⍺.code ⍵.section ⍺.name ⍵.component ⍵.room ⍵.instructor)∘{('@code' '@section' '@name' '@type' '@location' '@prof' ⎕r ⍺)⍵}¨summary desc
-             
+             isampm←{⍵∘{+/⍺⍷⍨⍵}¨'AM' 'PM'}
+             ampm←isampm ⍵.starttime
+             badtime←0 0≢ampm
+             ⍵.starttime←⊃((⊂⍵.starttime),⊂{add12←~2-⍸ispmam ⍵ ⋄ ∊{(⍕⍺),':',(⍕⍵)}/(((12×12≢⊃a)×add12),0)+a←2⊃':'⎕VFI¯2↓⍵}⍵.starttime)[1+badtime]
+             ⍵.endtime←⊃((⊂⍵.endtime),⊂{add12←~2-⍸ispmam ⍵ ⋄ ∊{(⍕⍺),':',(⍕⍵)}/(((12×12≢⊃a)×add12),0)+a←2⊃':'⎕VFI¯2↓⍵}⍵.endtime)[1+badtime]
+
              ⍝ Calculate start date adjustment for day of week
              ⍝ Map day abbreviations to numeric offsets and find the earliest
-             addDay←i[⊃⍋i←7|(1-⍨'Su'(,'M')(,'T')(,'W')'Th'(,'F')'S'⍳{⍵⊆⍨+\~(⎕C ⎕A)∊⍨⍵}⍵.days)-⌊(7|1 ⎕DT⊆)⊂(2⍴0),⍨(,2⊃'/: '⎕VFI ⍵.start,' ',⍵.starttime)[3 2 1 4 5]]
-             
+             addDay←i[⊃⍋i←7|(1-⍨'Su'(,'M')(,'T')(,'W')'Th'(,'F')'S'⍳{⍵⊆⍨+\~(⎕C ⎕A)∊⍨⍵}⍵.days)-⌊(7|1 ⎕DT⊆)⊂(2⍴0),⍨(,2⊃'/: '⎕VFI ⍵.start,' ',⍵.starttime)[{⍵:3 1 2 4 5⋄3 2 1 4 5}badtime]]
+
              ⍝ Generate VEVENT block for this class
              (
                  'BEGIN:VEVENT',(⎕UCS 10)
                  ⍝ Start time in Toronto timezone
-                 'DTSTART;TZID=America/Toronto:',(⊃'YYYYMMDD"T"hhmmss'(1200⌶)⊂addDay+1∘⎕DT⊂(2⍴0),⍨(,2⊃'/: '⎕VFI ⍵.start,' ',⍵.starttime)[3 2 1 4 5]),(⎕UCS 10)
-                 ⍝ End time in Toronto timezone  
-                 'DTEND;TZID=America/Toronto:',(⊃'YYYYMMDD"T"hhmmss'(1200⌶)⊂addDay+1∘⎕DT⊂(2⍴0),⍨(,2⊃'/: '⎕VFI ⍵.start,' ',⍵.endtime)[3 2 1 4 5]),(⎕UCS 10)
+                 'DTSTART;TZID=America/Toronto:',(⊃'YYYYMMDD"T"hhmmss'(1200⌶)⊂addDay+1∘⎕DT⊂(2⍴0),⍨(,2⊃'/: '⎕VFI ⍵.start,' ',⍵.starttime)[{⍵:3 1 2 4 5⋄3 2 1 4 5}badtime]),(⎕UCS 10)
+                 ⍝ End time in Toronto timezone
+                 'DTEND;TZID=America/Toronto:',(⊃'YYYYMMDD"T"hhmmss'(1200⌶)⊂addDay+1∘⎕DT⊂(2⍴0),⍨(,2⊃'/: '⎕VFI ⍵.start,' ',⍵.endtime)[{⍵:3 1 2 4 5⋄3 2 1 4 5}badtime]),(⎕UCS 10)
                  ⍝ Recurrence rule (only if start is not end date)
-                 (⍵.start≢⍵.end)/'RRULE:FREQ=WEEKLY;UNTIL=',(∊'YYYYMMDD"T"hhmmss'(1200⌶)⊂1∘⎕DT⊂(23 59 0 0),⍨⌽,2⊃'/'⎕VFI ⍵.end),';WKST=SU;BYDAY=',(∊{⍺,',',⍵}/'MO' 'TU' 'WE' 'TH' 'FR' 'SA' 'SU'[(,'M')(,'T')(,'W')'Th'(,'F')⍳{⍵⊆⍨+\~(⎕C ⎕A)∊⍨⍵}⍵.days]),(⎕UCS 10)
+                 (⍵.start≢⍵.end)/'RRULE:FREQ=WEEKLY;UNTIL=',(∊'YYYYMMDD"T"hhmmss'(1200⌶)⊂1∘⎕DT⊂(((23 59 0 0),⍨⌽,2⊃'/'⎕VFI ⍵.end)[{⍵:1 3 2 4 5 6 7⋄1 2 3 4 5 6 7}badtime])),';WKST=SU;BYDAY=',(∊{⍺,',',⍵}/'MO' 'TU' 'WE' 'TH' 'FR' 'SA' 'SU'[(,'M')(,'T')(,'W')'Th'(,'F')⍳{⍵⊆⍨+\~(⎕C ⎕A)∊⍨⍵}⍵.days]),(⎕UCS 10)
                  ⍝ Event summary and description
                  'SUMMARY:',summary,(⎕UCS 10)
                  'DESCRIPTION:',desc,(⎕UCS 10)
@@ -52,7 +57,7 @@
          }¨⍵.classes  ⍝ Process each class in the course
      }¨⍵  ⍝ Process each course
      body←∊body  ⍝ Flatten all VEVENT blocks
-     
+
      ⍝ Wrap events in complete iCalendar structure
      r←(
          'BEGIN:VCALENDAR',(⎕UCS 10)
