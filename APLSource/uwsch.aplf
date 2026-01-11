@@ -1,4 +1,4 @@
- r←uwsch schedule;a
+ (r df)←uwsch schedule;a
  ⍝ Parses University of Waterloo Quest class schedule text into structured data
  ⍝
  ⍝ This function takes raw text copied from a UW Quest class schedule page
@@ -38,7 +38,7 @@
  a←(⎕UCS 10)(≠⊆⊢){¯47↓23↓⍵↓⍨'Show Waitlisted Classes'(⍸⍷)⍵}schedule
  a←a⊂⍨0,⍨1↓(⊂'Status',(⎕UCS 9),'Units',(⎕UCS 9))(≡∨1∊⍷)¨a
  ⍝ a is the initial schedule parse - each element is one complete course
-
+df←detectDateFormat schedule
  r←{
      ⍝ Step 2: Process each course individually
      ⍝ Create course namespace with basic structure

@@ -1,0 +1,31 @@
+detectDateFormat←{
+    ⍝ Extract all date patterns from input
+    pattern←'\b(\d{1,2})[/\-.](\d{1,2})[/\-.](\d{4})\b'
+    matches←pattern ⎕S '\0'⊢⍵
+
+    ⍝ Return early if no dates found
+    0=≢matches:'NO_DATES' ⎕SIGNAL 100
+
+    ⍝ Extract first and second numbers from each date
+    first second←↓⍉0 ¯1↓↑'/'(2⊃⎕VFI)¨matches
+
+    ⍝ Identify dates that disambiguate the format
+    ⍝ If first > 12: must be DD/MM/YYYY
+    ⍝ If second > 12: must be MM/DD/YYYY
+    ddmm←first>12
+    mmdd←second>12
+
+    ⍝ Determine format based on evidence
+    hasDD←∨/ddmm
+    hasMM←∨/mmdd
+
+    ⍝ Both formats detected = inconsistent/error
+    hasDD∧hasMM:'INCONSISTENT Dates' ⎕SIGNAL 100
+
+    ⍝ Clear evidence for one format
+    hasDD:1
+    hasMM:0
+
+    ⍝ No disambiguating dates found (all dates have both parts ≤ 12)
+    'AMBIGUOUS' ⎕SIGNAL 100
+}
