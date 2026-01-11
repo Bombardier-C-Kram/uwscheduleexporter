@@ -10,7 +10,7 @@
           r←GetHTML'index'
       ∇
       
-      ∇ r←req ProcessSchedule _;schedule;summary;description
+      ∇ r←req ProcessSchedule _;schedule;summary;description;dateFormat
       ⍝ HTTP POST handler for processing schedule data
       ⍝ Args: req - HTTP request object containing JSON payload with:
       ⍝   - schedule: Raw text from UW Quest class schedule page
@@ -22,7 +22,8 @@
           schedule←req.Payload.schedule
           summary←req.Payload.summary
           description←req.Payload.description
-          r←summary description ##.ical ##.uwsch schedule
+          dateFormat←(⊂'true')≡req.Payload.dateFormat ⍝ 1: good, 0: bad
+          r←summary description dateFormat ##.ical ##.uwsch schedule
           ⍝ Set headers to trigger file download
           req.Response.Headers←3 2⍴'Content-Type' 'text/calendar; charset=utf-8' 'Content-Disposition' 'attachment; filename="schedule.ics"' 'Cache-Control' 'no-store'
       ∇
@@ -99,11 +100,18 @@
           html,←'        <div id="status" class="status"></div>'
           html,←'    </div>'
           html,←'    <script>'
+          html,←'    function detectDateFormat() {'
+          html,←'      const testDate = new Date(2023, 0, 13);'
+          html,←'      const formatted = testDate.toLocaleDateString();'
+          html,←'      const firstNumber = parseInt(formatted.match(/\d+/)[0]);'
+          html,←'      return firstNumber === 13;'
+          html,←'    }'
           html,←'        document.getElementById("scheduleForm").addEventListener("submit", async function(e) {'
           html,←'            e.preventDefault();'
           html,←'            const scheduleText = document.getElementById("schedule").value;'
           html,←'            const summaryTemplate = document.getElementById("summary").value;'
           html,←'            const descriptionTemplate = document.getElementById("description").value;'
+          html,←'            const dateIsGood = detectDateFormat();'
           html,←'            const statusDiv = document.getElementById("status");'
           html,←'            '
           html,←'            statusDiv.className = "status";'
@@ -116,7 +124,7 @@
           html,←'                    headers: {'
           html,←'                        "Content-Type": "application/json"'
           html,←'                    },'
-          html,←'                    body: JSON.stringify({ schedule: scheduleText, summary: summaryTemplate, description: descriptionTemplate })'
+          html,←'                    body: JSON.stringify({ schedule: scheduleText, summary: summaryTemplate, description: descriptionTemplate, dateFormat: dateIsGood})'
           html,←'                });'
           html,←'                '
           html,←'                if (response.ok) {'

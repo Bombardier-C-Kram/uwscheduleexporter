@@ -82,6 +82,9 @@
      cv←↑7{⍵⊂[1]⍨(≢⍵)⍴⍺↑1}{⍵~(⎕UCS 9)}¨b
      ⍝ Clean up first three columns (remove empty entries)
      cv[;1 2 3]←⍉↑{(cv[;⍵]~(⊂,' '))[+\~{(,' ')≡⍵}¨cv[;⍵]]}¨1 2 3
+
+     ⍝ Clean up further (removing empty entries)
+     cv←cv/[1]⍨4≤+/(⊂⎕d,(⎕c,⊢)⎕a) {∨/⍺∊⍵}¨cv
      ⍝ Create namespace for each class
      classes←{⎕NS class}¨⍳≢cv
      ⍝ Step 5: Populate class data fields
