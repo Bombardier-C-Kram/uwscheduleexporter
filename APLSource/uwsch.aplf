@@ -36,7 +36,7 @@
  ⍝schedule←⊃⎕NGET'QUESTCAL.txt'  ⍝ For testing with file input
  ⍝ Step 1: Extract schedule content and split by course delimiter
  a←(⎕UCS 10)(≠⊆⊢){¯47↓23↓⍵↓⍨'Show Waitlisted Classes'(⍸⍷)⍵}schedule
- a←a⊂⍨0,⍨1↓(⊂'Status',(⎕UCS 9),'Units',(⎕UCS 9))(≡∨1∊⍷)¨a
+ a←a⊂⍨((((⎕UCS 9)=⊃a)+1)⍴0),⍨(((⎕UCS 9)=⊃a)+1)↓(⊂'Status',(⎕UCS 9),'Units',(⎕UCS 9))(≡∨1∊⍷)¨a
  ⍝ a is the initial schedule parse - each element is one complete course
 df←detectDateFormat schedule
  r←{
