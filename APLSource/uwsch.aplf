@@ -1,13 +1,13 @@
  r←uwsch schedule;a
  ⍝ Parses University of Waterloo Quest class schedule text into structured data
- ⍝ 
+ ⍝
  ⍝ This function takes raw text copied from a UW Quest class schedule page
  ⍝ and converts it into a structured format suitable for calendar generation.
- ⍝ 
+ ⍝
  ⍝ Args:
  ⍝   schedule - Character vector containing the raw text from UW Quest schedule page
  ⍝              Expected to contain course information and class details
- ⍝ 
+ ⍝
  ⍝ Returns:
  ⍝   r - Vector of namespaces, each representing a course with structure:
  ⍝       .code        - Course code (e.g., 'ECE 150')
@@ -26,17 +26,17 @@
  ⍝         .instructor  - Instructor name
  ⍝         .start       - Start date
  ⍝         .end         - End date
- ⍝ 
+ ⍝
  ⍝ Processing steps:
  ⍝ 1. Extracts schedule content between specific markers
  ⍝ 2. Splits into individual course sections
  ⍝ 3. Parses course header information
  ⍝ 4. Extracts and structures class details for each course
 
- ⍝schedule←⊃⎕NGET'UWSchedule.txt'  ⍝ For testing with file input
+ schedule←⊃⎕NGET'QUESTCAL.txt'  ⍝ For testing with file input
  ⍝ Step 1: Extract schedule content and split by course delimiter
  a←(⎕UCS 10)(≠⊆⊢){¯47↓23↓⍵↓⍨'Show Waitlisted Classes'(⍸⍷)⍵}schedule
- a←a⊂⍨0,⍨1↓(⊂'Status',(⎕UCS 9),'Units',(⎕UCS 9),'Grading',(⎕UCS 9),'Deadlines')⍷a
+ a←a⊂⍨0,⍨1↓(⊂'Status',(⎕UCS 9),'Units',(⎕UCS 9))(≡∨1∊⍷)¨a
  ⍝ a is the initial schedule parse - each element is one complete course
 
  r←{
@@ -62,11 +62,11 @@
      idx←⍸','=⊃¨⌽¨b
      b[idx]←↓(↑b[idx]),' ',(↑b[idx+1])
      b←0~⍨(0@(idx+1))b
-     
+
      ⍝ Define class structure template
      class←(
          number:0       ⍝ Class number
-         section:''     ⍝ Section identifier  
+         section:''     ⍝ Section identifier
          component:''   ⍝ Component type (LEC, LAB, TUT, etc.)
          days:''        ⍝ Days of week
          starttime:''   ⍝ Start time
