@@ -1,0 +1,86 @@
+name: Export Error (500-level)
+description: Report a server error when processing your schedule
+title: "[Export Error] "
+labels: ["bug", "export-error"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an export error. To help us diagnose and fix the issue, please provide the following information.
+        
+        **Important:** For privacy and debugging purposes, please email your schedule data separately.
+  
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe what you were doing when the error occurred.
+      placeholder: I pasted my schedule and clicked "Process Schedule", then got a 500 error...
+    validations:
+      required: true
+  
+  - type: input
+    id: error-code
+    attributes:
+      label: Error Code/Message
+      description: If you saw a specific error code or message, please provide it here.
+      placeholder: "500 Internal Server Error"
+    validations:
+      required: false
+  
+  - type: input
+    id: term
+    attributes:
+      label: Academic Term
+      description: Which term/semester is this schedule for?
+      placeholder: "Winter 2026, 1251"
+    validations:
+      required: true
+  
+  - type: textarea
+    id: browser-info
+    attributes:
+      label: Browser & Environment
+      description: What browser and operating system are you using?
+      placeholder: "Chrome 120 on Windows 11"
+    validations:
+      required: false
+  
+  - type: textarea
+    id: custom-templates
+    attributes:
+      label: Custom Templates Used
+      description: If you modified the summary or description templates, please share them here.
+      placeholder: "Summary: @code @type\nDescription: @name in @location"
+    validations:
+      required: false
+  
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ## Submit Your Schedule Data
+        
+        **To help us fix this issue, please email your schedule to:**
+        
+        **uwschexp@bkaw.ca**
+        
+        **Subject line format:**
+        ```
+        Issue #[NUMBER] - Export Error - [TERM]
+        ```
+        
+        **Example:**
+        ```
+        Issue #42 - Export Error - Winter 2026
+        ```
+        
+        **Instructions:**
+        1. Copy your entire schedule from Quest (Ctrl+A, Ctrl+C)
+        2. Paste it into a text file (.txt)
+        3. Email to uwschexp@bkaw.ca with the subject line above
+        4. Replace `[NUMBER]` with this issue number (you'll see it after submitting)
+        5. Replace `[TERM]` with your academic term
+        
+        **Note:** We'll keep your schedule data confidential and only use it for debugging purposes.
