@@ -15,8 +15,8 @@
  ⍝ Usage: start
  ⍝ After running, the web interface will be available at http://localhost:8080
       JSrv←Jarvis.New(8111 web'JSON')
-      ⍝JSrv.DYALOG_JARVIS_THREAD←'0'
-      JSrv.Debug←2
+      JSrv.DYALOG_JARVIS_THREAD←'0'
+      JSrv.Debug←0
       JSrv.HTMLInterface←'' 'Index'
       JSrv.AllowGETs←1
       JSrv.AllowPOSTs←1
