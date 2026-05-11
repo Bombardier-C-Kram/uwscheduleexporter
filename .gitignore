@@ -3,3 +3,5 @@ uwclasses.ics
 aplcore
 deps/**/
 *.txt
+.claude/
+.devcontainer/

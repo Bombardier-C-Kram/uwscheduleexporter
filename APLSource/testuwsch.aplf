@@ -1,0 +1,31 @@
+ ∇ r←testuwsch;files;i;name;schedule;courses;df;ok;err;passed;failed
+  ⍝ Run uwsch parser against all .txt files in the tests/ directory.
+  ⍝ Files are gitignored (*.txt) so they must be added locally.
+  ⍝ Each file should contain raw text copied from a UW Quest schedule page.
+  ⍝
+  ⍝ Returns 1 if all tests pass, 0 if any fail.
+  files←⊃0(⎕NINFO⍠('Wildcard' 1))'tests/*.txt'
+  :If 0=≢files
+      ⎕←'No test files found in tests/ — add .txt files from Quest to run tests'
+      r←0
+      :Return
+  :EndIf
+  passed←failed←0
+  :For i :In ⍳≢files
+      name←i⊃files
+      schedule←⊃⎕NGET name
+      :Trap 0
+          (courses df)←uwsch schedule
+          ok←1
+          err←(⍕≢courses),' course(s) parsed'
+          passed+←1
+      :Else
+          ok←0
+          err←(⎕EM ⎕EN),' (',(⍕⎕EN),')'
+          failed+←1
+      :EndTrap
+      ⎕←((1+ok)⊃'FAIL' 'PASS'),' ',name,': ',err
+  :EndFor
+  ⎕←'',(⍕passed),' passed  ',(⍕failed),' failed  (',(⍕≢files),' total)'
+  r←0=failed
+ ∇
