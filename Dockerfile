@@ -1,4 +1,4 @@
-FROM dyalog/dyalog:20.0
+FROM dyalog/dyalog:21.0
 
 # Install curl for health checks
 USER root
