@@ -1,0 +1,6 @@
+# Store and check out text files with LF line endings on every platform.
+* text=auto eol=lf
+
+# Raw Quest pastes used as test fixtures: their CR/CRLF line endings are part
+# of what the parser is tested on, so git must never convert them.
+tests/fixtures/*.txt -text
