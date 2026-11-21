@@ -1,0 +1,984 @@
+
+											
+	
+	
+	
+						
+	
+				
+	
+GO!
+	
+	
+Go To
+	
+Test Student
+	
+	
+My Academics
+	
+Course Selection (Undergrad only)
+	
+Search for Classes
+	
+	
+	
+	
+  	My Class Schedule 	 	  	| 	 	  	Shopping Cart 	 	  	| 	 	  	Add 	 	  	| 	 	  	Drop 	 	  	| 	 	  	Swap 	 	  	| 	 	  	Edit 	 	  	| 	 	  	Term Information 	 	  	| 	 	  	Exam Information 	 
+		
+My Class Schedule
+	
+			
+	
+Select Display Option
+	
+List View
+	
+Weekly Calendar View
+	
+			
+	
+Spring 2026 | Undergraduate | University of Waterloo
+	
+	
+Group Box
+		
+	
+Class Schedule Filter Options Collapsible section Class Schedule Filter Options 
+		
+	
+Show Enrolled Classes
+	
+Show Dropped Classes
+	
+Show Waitlisted Classes
+	
+	
+	
+	
+ECE 102 - Information Session
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.00
+	
+Non-Graded Component
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+3044
+	
+001
+	
+SEM
+	
+F 3:30PM - 4:20PM
+	
+E7 5343
+	
+Alder BirchBi,
+Ceda Dogwoo
+	
+05/15/2026 - 05/15/2026
+ 
+	  	
+ 
+	
+F 3:30PM - 4:20PM
+	
+E7 5343
+	
+To be Announced
+	
+07/24/2026 - 07/24/2026
+	
+ECE 106 - Electricity & Magnetism
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.50
+	
+Numeric Grading Basis
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+2895
+	
+101
+	
+TUT
+	
+M 8:30AM - 10:20AM
+	
+DWE 1515
+	
+To be Announced
+	
+05/11/2026 - 06/19/2026
+ 
+	  	
+ 
+	
+M 8:30AM - 10:20AM
+	
+DWE 1515
+	
+To be Announced
+	
+06/29/2026 - 08/05/2026
+2901
+	
+201
+	
+LAB
+	
+Th 8:30AM - 11:20AM
+	
+E2 3346
+	
+EbonyEb Gi Heml
+	
+05/21/2026 - 05/21/2026
+ 
+	  	
+ 
+	
+Th 8:30AM - 11:20AM
+	
+E2 3346
+	
+EbonyEb Gi Heml
+	
+06/04/2026 - 06/04/2026
+ 
+	  	
+ 
+	
+Th 8:30AM - 11:20AM
+	
+E2 3346
+	
+EbonyEb Gi Heml
+	
+06/18/2026 - 06/18/2026
+ 
+	  	
+ 
+	
+Th 8:30AM - 11:20AM
+	
+E2 3346
+	
+EbonyEb Gi Heml
+	
+07/09/2026 - 07/09/2026
+ 
+	  	
+ 
+	
+Th 8:30AM - 11:20AM
+	
+E2 3346
+	
+EbonyEb Gi Heml
+	
+07/23/2026 - 07/23/2026
+2893
+	
+001
+	
+LEC
+	
+TWF 2:30PM - 3:20PM
+	
+E7 5343
+	
+Hick Ironwo
+	
+05/11/2026 - 06/19/2026
+ 
+	  	
+ 
+	
+Th 3:30PM - 4:20PM
+	
+E7 5343
+	
+Hick Ironwo
+	
+05/14/2026 - 05/14/2026
+ 
+	  	
+ 
+	
+Th 3:30PM - 4:20PM
+	
+E7 5343
+	
+Hick Ironwo
+	
+06/04/2026 - 06/04/2026
+ 
+	  	
+ 
+	
+M 8:30AM - 10:20AM
+	
+TBA
+	
+To be Announced
+	
+06/22/2026 - 06/22/2026
+ 
+	  	
+ 
+	
+TWF 2:30PM - 3:20PM
+	
+E7 5343
+	
+Hick Ironwo
+	
+06/29/2026 - 08/05/2026
+ 
+	  	
+ 
+	
+Th 3:30PM - 4:20PM
+	
+E7 5343
+	
+Hick Ironwo
+	
+07/16/2026 - 07/16/2026
+	
+ECE 108 - Discrete Math & Logic 1
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.50
+	
+Numeric Grading Basis
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+3228
+	
+101
+	
+TUT
+	
+F 10:30AM - 11:20AM
+	
+E7 5353
+	
+To be Announced
+	
+05/11/2026 - 06/19/2026
+ 
+	  	
+ 
+	
+F 10:30AM - 11:20AM
+	
+E7 5353
+	
+To be Announced
+	
+06/29/2026 - 08/05/2026
+3293
+	
+201
+	
+TST
+	
+Th 8:30AM - 10:20AM
+	
+TBA
+	
+To be Announced
+	
+06/25/2026 - 06/25/2026
+3045
+	
+001
+	
+LEC
+	
+M 1:30PM - 2:20PM
+	
+E7 5343
+	
+Junipe KatsuraKats
+	
+05/11/2026 - 06/19/2026
+ 
+	  	
+ 
+	
+TTh 12:30PM - 1:20PM
+	
+E7 5343
+	
+Junipe KatsuraKats
+	
+05/11/2026 - 06/19/2026
+ 
+	  	
+ 
+	
+Th 3:30PM - 4:20PM
+	
+E7 5343
+	
+Junipe KatsuraKats
+	
+05/21/2026 - 05/21/2026
+ 
+	  	
+ 
+	
+M 1:30PM - 2:20PM
+	
+E7 5343
+	
+Junipe KatsuraKats
+	
+06/29/2026 - 08/05/2026
+ 
+	  	
+ 
+	
+TTh 12:30PM - 1:20PM
+	
+E7 5343
+	
+Junipe KatsuraKats
+	
+06/29/2026 - 08/05/2026
+ 
+	  	
+ 
+	
+Th 3:30PM - 4:20PM
+	
+E7 5343
+	
+Junipe KatsuraKats
+	
+07/02/2026 - 07/02/2026
+ 
+	  	
+ 
+	
+Th 3:30PM - 4:20PM
+	
+E7 5343
+	
+Junipe KatsuraKats
+	
+07/23/2026 - 07/23/2026
+	
+ECE 124 - Digital Circuits & Systems
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.50
+	
+Numeric Grading Basis
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+2907
+	
+001
+	
+LEC
+	
+MTh 2:30PM - 3:20PM
+	
+E7 5343
+	
+Larch Maple
+	
+05/11/2026 - 06/19/2026
+ 
+	  	
+ 
+	
+W 1:30PM - 2:20PM
+	
+E7 5343
+	
+Larch Maple
+	
+05/11/2026 - 06/19/2026
+ 
+	  	
+ 
+	
+Th 3:30PM - 4:20PM
+	
+E7 5343
+	
+Larch Maple
+	
+05/28/2026 - 05/28/2026
+ 
+	  	
+ 
+	
+Th 3:30PM - 4:20PM
+	
+E7 5343
+	
+Larch Maple
+	
+06/11/2026 - 06/11/2026
+ 
+	  	
+ 
+	
+T 12:30PM - 2:20PM
+	
+TBA
+	
+To be Announced
+	
+06/23/2026 - 06/23/2026
+ 
+	  	
+ 
+	
+MTh 2:30PM - 3:20PM
+	
+E7 5343
+	
+Larch Maple
+	
+06/29/2026 - 08/05/2026
+ 
+	  	
+ 
+	
+W 1:30PM - 2:20PM
+	
+E7 5343
+	
+Larch Maple
+	
+06/29/2026 - 08/05/2026
+ 
+	  	
+ 
+	
+Th 3:30PM - 4:20PM
+	
+E7 5343
+	
+Larch Maple
+	
+07/09/2026 - 07/09/2026
+2909
+	
+101
+	
+TUT
+	
+M 10:30AM - 11:20AM
+	
+STC 0060
+	
+To be Announced
+	
+05/11/2026 - 06/19/2026
+ 
+	  	
+ 
+	
+M 10:30AM - 11:20AM
+	
+STC 0060
+	
+To be Announced
+	
+06/29/2026 - 08/05/2026
+2915
+	
+201
+	
+LAB
+	
+T 8:30AM - 11:20AM
+	
+E2 2364
+	
+Mahog Nut
+	
+05/19/2026 - 05/19/2026
+ 
+	  	
+ 
+	
+T 8:30AM - 11:20AM
+	
+E2 2364
+	
+Mahog Nut
+	
+06/02/2026 - 06/02/2026
+ 
+	  	
+ 
+	
+T 8:30AM - 11:20AM
+	
+E2 2364
+	
+Mahog Nut
+	
+06/16/2026 - 06/16/2026
+ 
+	  	
+ 
+	
+T 8:30AM - 11:20AM
+	
+E2 2364
+	
+Mahog Nut
+	
+07/07/2026 - 07/07/2026
+ 
+	  	
+ 
+	
+T 8:30AM - 11:20AM
+	
+E2 2364
+	
+Mahog Nut
+	
+07/21/2026 - 07/21/2026
+	
+ECE 140 - Linear Circuits
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.50
+	
+Numeric Grading Basis
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+3050
+	
+001
+	
+LEC
+	
+MWF 12:30PM - 1:20PM
+	
+E7 5343
+	
+PoplarP Quince
+	
+05/11/2026 - 06/19/2026
+ 
+	  	
+ 
+	
+F 3:30PM - 4:20PM
+	
+E7 5343
+	
+PoplarP Quince
+	
+05/22/2026 - 05/22/2026
+ 
+	  	
+ 
+	
+F 3:30PM - 4:20PM
+	
+E7 5343
+	
+PoplarP Quince
+	
+06/05/2026 - 06/05/2026
+ 
+	  	
+ 
+	
+F 12:30PM - 2:20PM
+	
+TBA
+	
+To be Announced
+	
+06/26/2026 - 06/26/2026
+ 
+	  	
+ 
+	
+MWF 12:30PM - 1:20PM
+	
+E7 5343
+	
+PoplarP Quince
+	
+06/29/2026 - 08/05/2026
+ 
+	  	
+ 
+	
+F 3:30PM - 4:20PM
+	
+E7 5343
+	
+PoplarP Quince
+	
+07/03/2026 - 07/03/2026
+3052
+	
+101
+	
+TUT
+	
+W 9:30AM - 11:20AM
+	
+E7 4437
+	
+To be Announced
+	
+05/11/2026 - 06/19/2026
+ 
+	  	
+ 
+	
+W 9:30AM - 11:20AM
+	
+E7 4437
+	
+To be Announced
+	
+06/29/2026 - 08/05/2026
+3058
+	
+201
+	
+LAB
+	
+Th 8:30AM - 11:20AM
+	
+E2 3344
+	
+Redwood Sequ
+	
+05/28/2026 - 05/28/2026
+ 
+	  	
+ 
+	
+Th 8:30AM - 11:20AM
+	
+E2 3344
+	
+Redwood Sequ
+	
+06/11/2026 - 06/11/2026
+ 
+	  	
+ 
+	
+Th 8:30AM - 11:20AM
+	
+E2 3344
+	
+Redwood Sequ
+	
+07/02/2026 - 07/02/2026
+ 
+	  	
+ 
+	
+Th 8:30AM - 11:20AM
+	
+E2 3344
+	
+Redwood Sequ
+	
+07/16/2026 - 07/16/2026
+ 
+	  	
+ 
+	
+Th 8:30AM - 11:20AM
+	
+E2 3344
+	
+Redwood Sequ
+	
+07/30/2026 - 07/30/2026
+	
+ECE 192 - Eng Economics & Society Impact
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.25
+	
+Numeric Grading Basis
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+3088
+	
+001
+	
+LEC
+	
+TW 3:30PM - 4:20PM
+	
+E7 5343
+	
+Spru SumacS
+	
+05/19/2026 - 06/10/2026
+ 
+	  	
+ 
+	
+T 3:30PM - 4:20PM
+	
+E7 5343
+	
+Spru SumacS
+	
+06/30/2026 - 06/30/2026
+ 
+	  	
+ 
+	
+TW 3:30PM - 4:20PM
+	
+E7 5343
+	
+Spru SumacS
+	
+07/07/2026 - 08/05/2026
+3090
+	
+101
+	
+TUT
+	
+M 3:30PM - 4:20PM
+	
+E7 5343
+	
+To be Announced
+	
+05/25/2026 - 05/25/2026
+ 
+	  	
+ 
+	
+M 3:30PM - 4:20PM
+	
+E7 5343
+	
+To be Announced
+	
+06/08/2026 - 06/08/2026
+ 
+	  	
+ 
+	
+M 3:30PM - 4:20PM
+	
+E7 5343
+	
+To be Announced
+	
+07/06/2026 - 07/27/2026
+	
+GENE 120 - First-Year Eng Seminar
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.00
+	
+Non-Graded Component
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+3340
+	
+001
+	
+SEM
+	
+F 3:30PM - 4:20PM
+	
+E7 5343
+	
+Alder BirchBi,
+Ceda Dogwoo
+	
+05/15/2026 - 05/15/2026
+ 
+	  	
+ 
+	
+F 3:30PM - 4:20PM
+	
+E7 5343
+	
+Ceda Dogwoo,
+Alder BirchBi
+	
+07/24/2026 - 07/24/2026
+	
+MATH 119 - Calculus 2 (Eng)
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.50
+	
+Numeric Grading Basis
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+3631
+	
+001
+	
+LEC
+	
+TThF 1:30PM - 2:20PM
+	
+E7 5343
+	
+Tamara Tupe
+	
+05/11/2026 - 06/19/2026
+ 
+	  	
+ 
+	
+F 3:30PM - 4:20PM
+	
+E7 5343
+	
+Tamara Tupe
+	
+05/29/2026 - 05/29/2026
+ 
+	  	
+ 
+	
+F 3:30PM - 4:20PM
+	
+E7 5343
+	
+Tamara Tupe
+	
+06/12/2026 - 06/12/2026
+ 
+	  	
+ 
+	
+TThF 1:30PM - 2:20PM
+	
+E7 5343
+	
+Tamara Tupe
+	
+06/29/2026 - 08/05/2026
+ 
+	  	
+ 
+	
+F 3:30PM - 4:20PM
+	
+E7 5343
+	
+Tamara Tupe
+	
+07/10/2026 - 07/10/2026
+3632
+	
+101
+	
+TUT
+	
+F 8:30AM - 10:20AM
+	
+DWE 3517
+	
+To be Announced
+	
+05/11/2026 - 06/19/2026
+ 
+	  	
+ 
+	
+F 8:30AM - 10:20AM
+	
+DWE 3517
+	
+To be Announced
+	
+06/29/2026 - 08/05/2026
+4045
+	
+201
+	
+TST
+	
+W 10:30AM - 12:20PM
+	
+TBA
+	
+To be Announced
+	
+06/24/2026 - 06/24/2026
+	
+Printer Friendly Page
+	
+				
+	
+	
+Go to top iconGo to top
