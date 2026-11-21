@@ -10,5 +10,5 @@
   r←''
   r,←(0<≢planted Leaks out)/'planted names survived. '
   r,←(FakeStudent≢StudentName out)/'student not replaced. '
-  r,←((Ics t)≢map Unmap Ics out)/'calendar changed. '
+  r,←((Stable Ics t)≢map Unmap Stable Ics out)/'calendar changed. '
 ∇

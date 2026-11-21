@@ -1,0 +1,6 @@
+Stable←{
+⍝ Calendar ⍵ in a form that can be compared exactly with another run's: lines
+⍝ unfolded (a fold can fall inside a name) and DTSTAMP values (the time of
+⍝ export) blanked.
+    ∊{'DTSTAMP:'≡8↑⍵:'DTSTAMP:' ⋄ ⍵}¨(Unfold ⍵),¨⊂CR LF
+}

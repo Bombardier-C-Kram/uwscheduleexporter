@@ -22,11 +22,14 @@
  ⍝   @prof     - Instructor name
  ⍝
  ⍝ Returns:
- ⍝   Complete iCalendar file content as character vector
+ ⍝   Complete iCalendar file content as character vector (RFC 5545: CRLF line
+ ⍝   endings, long lines folded, UID and DTSTAMP on every event, VTIMEZONE for
+ ⍝   America/Toronto, UNTIL in UTC, text escaped). DTSTAMP is the time of the call.
 
      summaryFmt descFmt dateFormat←⍺
-     LF←⎕UCS 10
+     CRLF←⎕UCS 13 10
      date←(1+dateFormat)⊃'M/D/YYYY' 'D/M/YYYY'
+     Day←{(date 1)⎕DT⊂⍵}                               ⍝ '05/01/2026' → day number
      At←{
      ⍝ Date ⍺ at time ⍵ → day number, with the time of day as the fraction.
      ⍝ Quest gives 24h ('15:30') or 12h ('3:30PM') times; ⎕DT validate mode tells them apart.
@@ -35,10 +38,31 @@
          (p 1)⎕DT⊂s
      }
      Stamp←{⊃(1 'YYYYMMDD"T"hhmmss')⎕DT ⍵}
-     body←{
-         ⍵{
+     UntilUTC←{
+     ⍝ 23:59 Toronto time on date ⍵, in UTC. ⎕DT has no time zones, so: Toronto is
+     ⍝ UTC-4 from the 2nd Sunday in March to the 1st Sunday in November, else UTC-5.
+         d←Day ⍵
+         y←⊃⊃(1 ¯1)⎕DT d
+         Sun←{f←1 ⎕DT⊂y ⍺ 1 ⋄ f+(7|-f)+7×⍵-1}          ⍝ month ⍺, ⍵th Sunday
+         dst←(d≥3 Sun 2)∧d<11 Sun 1
+         m←(1440×d)+(23×60)+59+60×5-dst               ⍝ whole minutes: no rounding
+         t←(3↑⊃(1 ¯1)⎕DT⌊m÷1440),(⌊60÷⍨1440|m),(60|m),0
+         ⊃(¯1 'YYYYMMDD"T"hhmmss"Z"')⎕DT⊂t
+     }
+     Escape←{∊{⍵∊'\;,':'\',⍵ ⋄ ⍵}¨⍵}                ⍝ RFC 5545 3.3.11 TEXT: \ ; , → \\ \; \,
+     Fold←{
+     ⍝ RFC 5545 3.1: a line over 75 octets continues on the next, after a space
+         ⍺←75
+         n←{≢'UTF-8'⎕UCS,⍵}¨⍵
+         ⍺≥+/n:⍵
+         k←+/⍺≥+\n
+         (k↑⍵),CRLF,' ',74∇k↓⍵
+     }
+     now←⊃(¯1 'YYYYMMDD"T"hhmmss"Z"')⎕DT⊂⊃¯1 ⎕DT'Z'
+     events←⊃,/{
+         ⊃,/⍵{
              ⍝ Skip classes without scheduled times
-             ⍵.starttime≡'':''
+             ⍵.starttime≡'':⍬
              ⍝ Apply template variable substitution
              summary desc←(⍺.code ⍵.section ⍺.name ⍵.component ⍵.room ⍵.instructor)∘{
                  repls←⍺
@@ -49,30 +73,31 @@
              wd←0 1 2 3 4 5 6 6[(,¨'Su' 'M' 'T' 'W' 'Th' 'F' 'S' 'Sa')⍳days]
              ⍝ First meeting: the first class day on or after the start date
              addDay←⌊/7|wd-7|⌊⍵.start At ⍵.starttime
+             start←Stamp addDay+⍵.start At ⍵.starttime
 
-             ⍝ Generate VEVENT block for this class
-             (
-                 'BEGIN:VEVENT',LF
-                 'DTSTART;TZID=America/Toronto:',(Stamp addDay+⍵.start At ⍵.starttime),LF
-                 'DTEND;TZID=America/Toronto:',(Stamp addDay+⍵.start At ⍵.endtime),LF
-                 ⍝ Recurrence rule (only if start is not end date), until the end of the last day
-                 (⍵.start≢⍵.end)/'RRULE:FREQ=WEEKLY;UNTIL=',(Stamp ⍵.end At'23:59'),';WKST=SU;BYDAY=',(¯1↓∊('SU' 'MO' 'TU' 'WE' 'TH' 'FR' 'SA')[1+wd],¨','),LF
-                 ⍝ Event summary and description
-                 'SUMMARY:',summary,LF
-                 'DESCRIPTION:',desc,LF
-                 'END:VEVENT',LF
-             )
+             ⍝ Lines of the VEVENT for this class
+             e←⊂'BEGIN:VEVENT'
+             e,←⊂'UID:',(⍺.code~' '),'-',⍵.section,'-',⍵.component,'-',(⍕⍵.number),'-',start,'@uw.bkaw.ca'
+             e,←⊂'DTSTAMP:',now
+             e,←⊂'DTSTART;TZID=America/Toronto:',start
+             e,←⊂'DTEND;TZID=America/Toronto:',Stamp addDay+⍵.start At ⍵.endtime
+             ⍝ Recurrence rule (only if start is not end date), until the end of the last day
+             e,←(⍵.start≢⍵.end)/⊂'RRULE:FREQ=WEEKLY;UNTIL=',(UntilUTC ⍵.end),';WKST=SU;BYDAY=',¯1↓∊('SU' 'MO' 'TU' 'WE' 'TH' 'FR' 'SA')[1+wd],¨','
+             e,←⊂'SUMMARY:',Escape summary
+             e,←⊂'DESCRIPTION:',Escape desc
+             e,⊂'END:VEVENT'
          }¨⍵.classes  ⍝ Process each class in the course
      }¨⍵  ⍝ Process each course
-     body←∊body  ⍝ Flatten all VEVENT blocks
 
-     ⍝ Wrap events in complete iCalendar structure
-     r←(
-         'BEGIN:VCALENDAR',LF
-         'VERSION:2.0',LF
-         'PRODID:-//uw.bkaw.ca//EN',LF
-         body
-         'END:VCALENDAR'
-     )
-     ∊r  ⍝ Return as flat character vector
+     ⍝ Toronto's time zone, which DTSTART and DTEND refer to
+     tz←'BEGIN:VTIMEZONE' 'TZID:America/Toronto'
+     tz,←'BEGIN:DAYLIGHT' 'TZOFFSETFROM:-0500' 'TZOFFSETTO:-0400' 'TZNAME:EDT'
+     tz,←'DTSTART:19700308T020000' 'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU' 'END:DAYLIGHT'
+     tz,←'BEGIN:STANDARD' 'TZOFFSETFROM:-0400' 'TZOFFSETTO:-0500' 'TZNAME:EST'
+     tz,←'DTSTART:19701101T020000' 'RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU' 'END:STANDARD'
+     tz,←⊂'END:VTIMEZONE'
+
+     ⍝ Wrap events in complete iCalendar structure, one CRLF-terminated line each
+     lines←'BEGIN:VCALENDAR' 'VERSION:2.0' 'PRODID:-//uw.bkaw.ca//EN',tz,events,⊂'END:VCALENDAR'
+     ∊(Fold¨lines),¨⊂CRLF
  }
