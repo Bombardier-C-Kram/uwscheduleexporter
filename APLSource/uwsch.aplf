@@ -58,10 +58,10 @@ df←detectDateFormat schedule
 
      ⍝ Step 3: Extract class details section
      b←⍵↓⍨(⊂'Class Nbr',(⎕UCS 9),'Section',(⎕UCS 9),'Component',(⎕UCS 9),'Days & Times',(⎕UCS 9),'Room',(⎕UCS 9),'Instructor',(⎕UCS 9),'Start/End Date')(⍸⍷)⍵
-     ⍝ Handle multi-line entries by merging continuation lines
-     idx←⍸','=⊃¨⌽¨b
-     b[idx]←↓(↑b[idx]),' ',(↑b[idx+1])
-     b←0~⍨(0@(idx+1))b
+     ⍝ Handle multi-line entries: a line ending in a comma continues on the next
+     ⍝ (an instructor list can span any number of lines). Join with single spaces.
+     e←','=⊃¨⌽¨b
+     b←{⊃{⍺,' ',⍵}/⍵}¨(1,¯1↓~e)⊂b
 
      ⍝ Define class structure template
      class←(
@@ -80,8 +80,9 @@ df←detectDateFormat schedule
      ⍝ Step 4: Parse class data into structured format
      ⍝ Convert tab-separated data into matrix, handling 7 columns per class
      cv←↑7{⍵⊂[1]⍨(≢⍵)⍴⍺↑1}{⍵~(⎕UCS 9)}¨b
-     ⍝ Clean up first three columns (remove empty entries)
-     cv[;1 2 3]←⍉↑{(cv[;⍵]~(⊂,' '))[+\~{(,' ')≡⍵}¨cv[;⍵]]}¨1 2 3
+     ⍝ Continuation rows leave Class Nbr, Section and Component blank ('' or spaces
+     ⍝ depending on the paste): fill them in from the row above
+     cv[;1 2 3]←⍉↑{c←cv[;⍵] ⋄ blank←∧/¨c∊¨⊂' ' ⋄ ((~blank)/c)[+\~blank]}¨1 2 3
 
      ⍝ Clean up further (removing empty entries)
      cv←cv/[1]⍨4≤+/(⊂⎕d,(⎕c,⊢)⎕a) {∨/⍺∊⍵}¨cv
@@ -93,7 +94,8 @@ df←detectDateFormat schedule
      ⍝ Parse start/end dates
      classes.(start end)←{(⊂⍵↑⍨2-⍨b),⊂⍵↓⍨1+b←⍵⍳'-'}¨cv[;7]
      ⍝ Parse days and times from combined field
-     classes.(days starttime endtime)←{{⌽(⊂2⊃⍵),(⊂b↓⊃⍵),⊂(⊃⍵)↑⍨¯1+b←' '⍳⍨⊃⍵}{(⊂⍵↑⍨2-⍨b),⊂⍵↓⍨1+b←⍵⍳'-'}⍵}¨cv[;4]
+     ⍝ ('TBA', e.g. for online classes, has no days or times)
+     classes.(days starttime endtime)←{~'-'∊⍵:'' '' '' ⋄ {⌽(⊂2⊃⍵),(⊂b↓⊃⍵),⊂(⊃⍵)↑⍨¯1+b←' '⍳⍨⊃⍵}{(⊂⍵↑⍨2-⍨b),⊂⍵↓⍨1+b←⍵⍳'-'}⍵}¨cv[;4]
      course.classes←classes
      course
  }¨a
