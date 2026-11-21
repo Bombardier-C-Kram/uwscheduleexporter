@@ -2,15 +2,16 @@
  ⍝ Generates iCalendar (.ics) format from structured course data
  ⍝
  ⍝ This function takes parsed course data and custom templates to create
- ⍝ a standards-compliant iCalendar file for importing into calendar applications.
+ ⍝ an iCalendar file for importing into calendar applications.
  ⍝
  ⍝ Left argument (⍺):
- ⍝   summary desc - Two-element vector containing template strings:
- ⍝     summary  - Template for event titles (supports variables)
- ⍝     desc     - Template for event descriptions (supports variables)
+ ⍝   summary desc dateFormat
+ ⍝     summary    - Template for event titles (supports variables)
+ ⍝     desc       - Template for event descriptions (supports variables)
+ ⍝     dateFormat - 1 if dates are DD/MM/YYYY, 0 if MM/DD/YYYY (from uwsch/detectDateFormat)
  ⍝
  ⍝ Right argument (⍵):
- ⍝   Vector of course namespaces from uwsch function
+ ⍝   Vector of course namespaces from uwsch function (not modified)
  ⍝
  ⍝ Template variables (replaced in summary and description):
  ⍝   @code     - Course code (e.g., 'ECE 150')
@@ -24,39 +25,42 @@
  ⍝   Complete iCalendar file content as character vector
 
      summaryFmt descFmt dateFormat←⍺
+     LF←⎕UCS 10
+     date←(1+dateFormat)⊃'M/D/YYYY' 'D/M/YYYY'
+     At←{
+     ⍝ Date ⍺ at time ⍵ → day number, with the time of day as the fraction.
+     ⍝ Quest gives 24h ('15:30') or 12h ('3:30PM') times; ⎕DT validate mode tells them apart.
+         s←⍺,' ',⍵
+         p←date,' ',(1+(date,' h:mm')0 ⎕DT⊂s)⊃'t:mmPP' 'h:mm'
+         (p 1)⎕DT⊂s
+     }
+     Stamp←{⊃(1 'YYYYMMDD"T"hhmmss')⎕DT ⍵}
      body←{
          ⍵{
              ⍝ Skip classes without scheduled times
              ⍵.starttime≡'':''
              ⍝ Apply template variable substitution
-             ⍝summary desc←(⍺.code ⍵.section ⍺.name ⍵.component ⍵.room ⍵.instructor)∘{('@code' '@section' '@name' '@type' '@location' '@prof'⎕R ⍺)⍵}¨summaryFmt descFmt
              summary desc←(⍺.code ⍵.section ⍺.name ⍵.component ⍵.room ⍵.instructor)∘{
                  repls←⍺
                  ('@code' '@section' '@name' '@type' '@location' '@prof'⎕R{repls⊃⍨1+⍵.PatternNum})⍵
              }¨summaryFmt descFmt
-             isampm←{⍵∘{+/⍺⍷⍨⍵}¨'AM' 'PM'}
-             ampm←isampm ⍵.starttime
-             badtime←0 0≢ampm
-             ⍵.starttime←⊃((⊂⍵.starttime),⊂{add12←~2-⍸isampm ⍵ ⋄ ∊{(⍕⍺),':',(⍕⍵)}/(((12×12≢⊃a)×add12),0)+a←2⊃':'⎕VFI ¯2↓⍵}⍵.starttime)[1+badtime]
-             ⍵.endtime←⊃((⊂⍵.endtime),⊂{add12←~2-⍸isampm ⍵ ⋄ ∊{(⍕⍺),':',(⍕⍵)}/(((12×12≢⊃a)×add12),0)+a←2⊃':'⎕VFI ¯2↓⍵}⍵.endtime)[1+badtime]
-             dateFormat←~dateFormat
-             ⍝ Calculate start date adjustment for day of week
-             ⍝ Map day abbreviations to numeric offsets and find the earliest
-             addDay←i[⊃⍋i←7|(1-⍨'Su'(,'M')(,'T')(,'W')'Th'(,'F')'S'⍳{⍵⊆⍨+\~(⎕C ⎕A)∊⍨⍵}⍵.days)-⌊(7|1 ⎕DT⊆)⊂(2⍴0),⍨(,2⊃'/: '⎕VFI ⍵.start,' ',⍵.starttime)[{⍵:3 1 2 4 5 ⋄ 3 2 1 4 5}dateFormat]]
+             ⍝ Days of the week as 0 (Sunday) to 6 (Saturday), like 7|day number
+             days←{⍵⊆⍨+\~(⎕C ⎕A)∊⍨⍵}⍵.days                 ⍝ 'TTh' → 'T' 'Th'
+             wd←0 1 2 3 4 5 6 6[(,¨'Su' 'M' 'T' 'W' 'Th' 'F' 'S' 'Sa')⍳days]
+             ⍝ First meeting: the first class day on or after the start date
+             addDay←⌊/7|wd-7|⌊⍵.start At ⍵.starttime
 
              ⍝ Generate VEVENT block for this class
              (
-                 'BEGIN:VEVENT',(⎕UCS 10)
-                 ⍝ Start time in Toronto timezone
-                 'DTSTART;TZID=America/Toronto:',(⊃'YYYYMMDD"T"hhmmss'(1200⌶)⊂addDay+1∘⎕DT⊂(2⍴0),⍨(,2⊃'/: '⎕VFI ⍵.start,' ',⍵.starttime)[{⍵:3 1 2 4 5 ⋄ 3 2 1 4 5}dateFormat]),(⎕UCS 10)
-                 ⍝ End time in Toronto timezone
-                 'DTEND;TZID=America/Toronto:',(⊃'YYYYMMDD"T"hhmmss'(1200⌶)⊂addDay+1∘⎕DT⊂(2⍴0),⍨(,2⊃'/: '⎕VFI ⍵.start,' ',⍵.endtime)[{⍵:3 1 2 4 5 ⋄ 3 2 1 4 5}dateFormat]),(⎕UCS 10)
-                 ⍝ Recurrence rule (only if start is not end date)
-                 (⍵.start≢⍵.end)/'RRULE:FREQ=WEEKLY;UNTIL=',(∊'YYYYMMDD"T"hhmmss'(1200⌶)⊂1∘⎕DT⊂(((23 59 0 0),⍨⌽,2⊃'/'⎕VFI ⍵.end)[{⍵:1 3 2 4 5 6 7 ⋄ 1 2 3 4 5 6 7}dateFormat])),';WKST=SU;BYDAY=',(∊{⍺,',',⍵}/'MO' 'TU' 'WE' 'TH' 'FR' 'SA' 'SU'[(,'M')(,'T')(,'W')'Th'(,'F')⍳{⍵⊆⍨+\~(⎕C ⎕A)∊⍨⍵}⍵.days]),(⎕UCS 10)
+                 'BEGIN:VEVENT',LF
+                 'DTSTART;TZID=America/Toronto:',(Stamp addDay+⍵.start At ⍵.starttime),LF
+                 'DTEND;TZID=America/Toronto:',(Stamp addDay+⍵.start At ⍵.endtime),LF
+                 ⍝ Recurrence rule (only if start is not end date), until the end of the last day
+                 (⍵.start≢⍵.end)/'RRULE:FREQ=WEEKLY;UNTIL=',(Stamp ⍵.end At'23:59'),';WKST=SU;BYDAY=',(¯1↓∊('SU' 'MO' 'TU' 'WE' 'TH' 'FR' 'SA')[1+wd],¨','),LF
                  ⍝ Event summary and description
-                 'SUMMARY:',summary,(⎕UCS 10)
-                 'DESCRIPTION:',desc,(⎕UCS 10)
-                 'END:VEVENT',(⎕UCS 10)
+                 'SUMMARY:',summary,LF
+                 'DESCRIPTION:',desc,LF
+                 'END:VEVENT',LF
              )
          }¨⍵.classes  ⍝ Process each class in the course
      }¨⍵  ⍝ Process each course
@@ -64,9 +68,9 @@
 
      ⍝ Wrap events in complete iCalendar structure
      r←(
-         'BEGIN:VCALENDAR',(⎕UCS 10)
-         'VERSION:2.0',(⎕UCS 10)
-         'PRODID:-//uw.bkaw.ca//EN',(⎕UCS 10)
+         'BEGIN:VCALENDAR',LF
+         'VERSION:2.0',LF
+         'PRODID:-//uw.bkaw.ca//EN',LF
          body
          'END:VCALENDAR'
      )
