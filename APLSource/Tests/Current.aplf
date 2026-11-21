@@ -1,0 +1,6 @@
+Current←{
+⍝ '' if expected files for fixture ⍺ (without .txt) match the reference model on paste ⍵
+    ok←((ReadRaw ⍺,'.json')≡RefDump ⍵)∧(ReadRaw ⍺,'.events')≡Lines RefEvents ⍵
+    ok:''
+    'out of date with the reference model: run Tests.WriteExpected and review the diff'
+}

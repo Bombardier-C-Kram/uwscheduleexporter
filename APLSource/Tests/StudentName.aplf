@@ -1,0 +1,9 @@
+StudentName←{
+⍝ Quest shows the signed-in student's name between 'Go To' and 'My Academics'.
+    t←ToLF ⍵
+    i j←⊃¨(⍸'Go To'⍷t)(⍸'My Academics'⍷t)
+    (0∊i j)∨j≤i:'Cannot find the student name (expected between "Go To" and "My Academics")'⎕SIGNAL 11
+    n←Trim(i+4)↓(j-1)↑t
+    0=≢n:'Student name is empty'⎕SIGNAL 11
+    n
+}

@@ -1,0 +1,7 @@
+Diff2←{
+⍝ '' if lists of strings ⍺ and ⍵ match, else the first difference
+    ⍺≡⍵:''
+    (≢⍺)≠≢⍵:'expected ',(⍕≢⍺),' items, got ',(⍕≢⍵)
+    i←⊃⍸~⍺≡¨⍵
+    'item ',(⍕i),': expected "',(i⊃⍺),'" got "',(i⊃⍵),'"'
+}

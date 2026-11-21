@@ -1,0 +1,6 @@
+WeekDays←{
+⍝ 'MTTh' → 1 2 4  (0 = Sunday, as 7|1 ⎕DT gives)
+    t←'Su|Sa|Th|M|T|W|F|S'⎕S'&'⊢⍵
+    (∊t)≢⍵:('Unknown days "',⍵,'"')⎕SIGNAL 11
+    0 6 4 1 2 3 5 6[(,¨'Su' 'Sa' 'Th' 'M' 'T' 'W' 'F' 'S')⍳,¨t]
+}

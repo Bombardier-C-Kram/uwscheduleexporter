@@ -1,0 +1,1 @@
+RefDump←{ToLF ⎕JSON⍠'Compact' 0⊢RefParse ⍵}

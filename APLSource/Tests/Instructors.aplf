@@ -1,0 +1,6 @@
+Instructors←{
+⍝ Distinct people named in the instructor fields of parsed courses ⍵.
+    f←⊃,/{0=≢⍵.classes:⍬ ⋄ ⍵.classes.instructor}¨⍵
+    n←Trim¨⊃,/{⍵⊆⍨⍵≠','}¨f
+    (∪n)~(⊂''),⊂TBA
+}

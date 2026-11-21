@@ -1,0 +1,13 @@
+∇ lines←IcsEvents ics;l;b;e;i
+ ⍝ The class meetings calendar text ics describes, as sorted EventLines. Reads what
+ ⍝ the calendar means, not how it is written, so a correct change of format (CRLF,
+ ⍝ folding, escaping, UID/DTSTAMP, VTIMEZONE, UTC times, EXDATE) still matches.
+  l←Unfold ics
+  b←⍸l≡¨⊂'BEGIN:VEVENT' ⋄ e←⍸l≡¨⊂'END:VEVENT'
+  :If (≢b)≢≢e ⋄ 'Unbalanced BEGIN/END:VEVENT'⎕SIGNAL 11 ⋄ :EndIf
+  lines←⍬
+  :For i :In ⍳≢b
+      lines,←OneEvent l[b[i]+⍳e[i]-b[i]+1]
+  :EndFor
+  lines←lines[⍋lines]
+∇

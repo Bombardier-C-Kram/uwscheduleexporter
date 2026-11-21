@@ -1,0 +1,6 @@
+(
+  ⍝ Templates for expected .events: the web UI defaults, which use every variable.
+  ⍝ Summary, then description.
+  '@code @type in @location'
+  '@code-@section: @name (@type) in @location with @prof'
+)

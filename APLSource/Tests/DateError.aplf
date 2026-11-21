@@ -1,0 +1,1 @@
+DateError←{0::⎕DMX.EM ⋄ 'no error'⊣##.detectDateFormat ⍵}

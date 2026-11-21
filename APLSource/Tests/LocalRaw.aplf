@@ -1,0 +1,3 @@
+∇ r←LocalRaw
+  r←{⍵[⍋⍵]}⊃0(⎕NINFO⍠1)RawGlob
+∇

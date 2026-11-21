@@ -1,0 +1,7 @@
+∇ text WriteRaw file;tie;b
+  :If ⎕NEXISTS file ⋄ ⎕NDELETE file ⋄ :EndIf
+  tie←file ⎕NCREATE 0
+  b←'UTF-8'⎕UCS text
+  (b-256×b>127)⎕NAPPEND tie 83
+  ⎕NUNTIE tie
+∇

@@ -1,0 +1,5 @@
+FreePath←{
+    f←FixtureDir,⍺,((⍵>1)/'-',⍕⍵),'.txt'
+    ⎕NEXISTS f:⍺ ∇ ⍵+1
+    f
+}

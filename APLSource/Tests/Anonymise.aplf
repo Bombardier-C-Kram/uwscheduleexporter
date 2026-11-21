@@ -1,0 +1,17 @@
+∇ dst←{allow}Anonymise src;out;map;dup
+ ⍝ Make a committed fixture (plus expected files) from raw Quest paste src.
+ ⍝ allow: extra text you have checked is not personal data, if the
+ ⍝ unrecognised-text check stops you.
+ ⍝ Writes nothing unless every safety check in AnonymiseText passes.
+  :If 900⌶⍬ ⋄ allow←⍬ ⋄ :EndIf
+  (out map)←(⊆allow)AnonymiseText ReadRaw src
+  :For dup :In Fixtures
+      :If out≡ReadRaw dup ⋄ ('Already a fixture: ',dup)⎕SIGNAL 11 ⋄ :EndIf
+  :EndFor
+  3 ⎕MKDIR FixtureDir
+  dst←(Describe out)FreePath 1
+  out WriteRaw dst
+  WriteExpected dst
+  Say'Wrote ',dst,' (+ .json, .events): replaced the student and ',(⍕¯1+≢map),' instructor name(s)'
+  Say'Check it yourself before committing:  diff ',src,' ',dst
+∇

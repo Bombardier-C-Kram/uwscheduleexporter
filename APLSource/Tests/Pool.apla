@@ -1,0 +1,10 @@
+(
+  ⍝ Fake instructor names are built from these words, repeated or cut to the length
+  ⍝ of the word they replace (see FakeWords). They are deliberately not people's
+  ⍝ names, so a committed fixture can be checked mechanically (IsFakeWord).
+  'Alder' ⋄ 'Birch' ⋄ 'Cedar' ⋄ 'Dogwood' ⋄ 'Ebony' ⋄ 'Ginkgo' ⋄ 'Hemlock' ⋄ 'Hickory'
+  'Ironwood' ⋄ 'Juniper' ⋄ 'Katsura' ⋄ 'Larch' ⋄ 'Maple' ⋄ 'Mahogany' ⋄ 'Nutmeg' ⋄ 'Poplar'
+  'Quince' ⋄ 'Redwood' ⋄ 'Sequoia' ⋄ 'Spruce' ⋄ 'Sumac' ⋄ 'Tamarack' ⋄ 'Tupelo' ⋄ 'Walnut'
+  'Zelkova' ⋄ 'Acacia' ⋄ 'Baobab' ⋄ 'Catalpa' ⋄ 'Cypress' ⋄ 'Hawthorn' ⋄ 'Magnolia' ⋄ 'Mulberry'
+  'Sassafras' ⋄ 'Sycamore' ⋄ 'Wisteria' ⋄ 'Buckeye' ⋄ 'Chestnut' ⋄ 'Hornbeam' ⋄ 'Locust' ⋄ 'Sweetgum'
+)

@@ -1,0 +1,12 @@
+DateTime←{
+⍝ (params value) of a DATE or DATE-TIME → minutes since day 0, Toronto local time
+    params v←⍵
+    tz←5↓¨params/⍨'TZID='∘≡¨5↑¨params
+    ~∧/tz∊⊂'America/Toronto':('Time zone not understood by the tests: ',⊃tz)⎕SIGNAL 11
+    8=≢v:(1440×('YYYYMMDD' 1)⎕DT⊂v)+(60×23)+59     ⍝ a DATE (in UNTIL) covers the whole day
+    z←'Z'=⊃⌽v                                        ⍝ ⎕DT parses the Z but doesn't convert
+    t←⊃(('YYYYMMDD"T"hhmmss',z/'"Z"')¯1)⎕DT⊂v
+    m←(1440×1 ⎕DT⊂3↑t)+60⊥t[4 5]
+    z:TorontoFromUTC m
+    m
+}

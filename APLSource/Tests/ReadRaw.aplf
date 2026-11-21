@@ -1,0 +1,7 @@
+ReadRaw←{
+⍝ Read UTF-8 text without touching line endings (⎕NGET turns CR and CRLF into LF).
+    tie←⍵ ⎕NTIE 0
+    b←⎕NREAD tie 83(⎕NSIZE tie)0
+    _←⎕NUNTIE tie
+    'UTF-8'⎕UCS 256|b
+}

@@ -1,0 +1,6 @@
+∇ r←Fixtures
+  r←⍬
+  :If ⎕NEXISTS FixtureDir
+      r←{⍵[⍋⍵]}⊃0(⎕NINFO⍠1)FixtureDir,'*.txt'
+  :EndIf
+∇

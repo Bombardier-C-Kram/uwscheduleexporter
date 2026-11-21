@@ -1,0 +1,6 @@
+Minutes←{
+⍝ '8:30AM' '12:30PM' '15:30' → minutes after midnight
+    h m←⍎¨':'(≠⊆⊢)⍵~'APM '
+    ~∨/'AP'∊⍵:(60×h)+m
+    (60×(12|h)+12×'P'∊⍵)+m
+}

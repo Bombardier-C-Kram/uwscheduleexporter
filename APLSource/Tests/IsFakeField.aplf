@@ -1,0 +1,1 @@
+IsFakeField←{w←⍵⊆⍨~⍵∊' -,' ⋄ (0<≢w)∧∧/IsFakeWord¨w}

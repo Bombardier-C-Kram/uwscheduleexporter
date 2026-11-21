@@ -123,9 +123,49 @@ class.(
 )
 ```
 
+## Testing
+
+```bash
+./test.apls            # from the repository root; exit code 0 if everything passed
+```
+
+or `testuwsch` / `Tests.Run` in a session. The suite (`APLSource/Tests/`, one function per file; start at `Run.aplf`) runs:
+
+- **Unit tests** for `detectDateFormat` and `ical` on a hand-built course.
+- **Expected-output tests**: each fixture in `tests/fixtures/` has the expected parse (`.json`) and the expected
+  class meetings (`.events`, one line per meeting: date, time, summary, description). The calendar is expanded
+  into meetings before comparing, so it is checked for what it means, not how it is formatted.
+- **RFC 5545 checks**: CRLF line endings, line folding, UID/DTSTAMP, VTIMEZONE, UTC `UNTIL`, escaped text.
+- **Variants**: each fixture is rewritten with LF/CRLF/CR line endings, DD/MM↔MM/DD dates, 12h↔24h times, empty lines removed, and junk around it. Every variant must give the same calendar.
+- **Privacy guard**: fails if a fixture names anyone other than the fake student and fake instructors.
+- Any raw pastes in `tests/*.txt` (gitignored) are compared with the reference model and run through the variants.
+
+Expected files are **never generated from the code under test**. They come from a separate, deliberately plain
+reference model in `APLSource/Tests/` (`RefParse`, `RefEvents`), so a bug in `uwsch` or `ical` makes a test fail
+instead of becoming the expected output. Tests for known bugs stay red until the bug is fixed.
+
+### Adding a schedule
+
+Real Quest pastes contain the student's and instructors' names, so they must never be committed.
+Save the paste as `tests/<anything>.txt` (ignored by git), then in a session at the repository root:
+
+```apl
+Tests.Anonymise 'tests/<anything>.txt'
+```
+
+This writes `tests/fixtures/<term>-<ddmm|mmdd>-<12h|24h>-<lf|crlf|cr>-<plain|tabbed>.txt` plus its `.json` and `.events`.
+Names are replaced with same-length fakes; everything else is kept byte for byte. Nothing is written unless
+no name (or part of one) remains, swapping the names back restores the original exactly, the parse is
+unchanged, and there is no unrecognised text (which could be personal data such as a student number).
+If it stops on text you have checked is harmless, allow it explicitly: `'message.txt' '8 Ko' Tests.Anonymise '...'`.
+
+`Tests.WriteExpected ''` rewrites the expected files from the reference model (e.g. after changing the
+templates or fixing the model). Review `git diff tests/fixtures`: these files are the specification.
+If the app's output changes on purpose, change the reference model, not the expected files by hand.
+
 ## Dependencies
 
-- **Dyalog APL**: Version 20.0 or later
+- **Dyalog APL**: Version 21.0 or later (the tests use `⎕DT` pattern parsing, new in 21.0)
 - **Jarvis**: Web server framework (included in `deps/`)
 - **Cider/Tatin**: APL project/package manager
 

@@ -1,0 +1,9 @@
+Diff←{
+⍝ '' if text ⍵ matches expected text ⍺, else where they first differ.
+    ⍺≡⍵:''
+    a b←{⍵⊆⍨⍵≠LF}¨ToLF¨⍺ ⍵
+    i←⊃⍸(n↑a)≢¨(n←⌊/≢¨a b)↑b
+    c←' (',(⍕+/~a∊b),' expected line(s) missing, ',(⍕+/~b∊a),' unexpected)'
+    i=0:'differs after line ',(⍕n),' (or only in whitespace/line endings)',c
+    'line ',(⍕i),': expected "',(i⊃a),'" got "',(i⊃b),'"',c
+}

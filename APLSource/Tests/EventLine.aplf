@@ -1,0 +1,6 @@
+EventLine←{
+⍝ day start end summary description → 'YYYY-MM-DD Ddd HH:MM-HH:MM | summary | description'
+    d s e sum desc←⍵
+    HM←{(¯2↑'0',⍕⌊⍵÷60),':',¯2↑'0',⍕60|⍵}
+    (∊'YYYY-MM-DD Ddd'(1200⌶)d),' ',(HM s),'-',(HM e),' | ',sum,' | ',desc
+}

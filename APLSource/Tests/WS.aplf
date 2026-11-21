@@ -1,0 +1,4 @@
+∇ r←WS
+ ⍝ Whitespace, including non-breaking space
+  r←' ',⎕UCS 9 10 13 160
+∇

@@ -1,0 +1,9 @@
+FakeNames←{
+⍝ A fake name for each name in ⍵, word by word. Spaces and hyphens are kept and
+⍝ every word keeps its length, so the parser sees the same shapes: it pads merged
+⍝ multi-instructor fields to the longest name, so lengths change its output.
+    0=≢⍵:⍬
+    words←∪⊃,/{⍵⊆⍨~⍵∊' -'}¨⍵
+    fakes←FakeWords words
+    {('[^ \-]+'⎕R{fakes⊃⍨words⍳⊂⍵.Match})⍵}¨⍵
+}

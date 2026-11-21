@@ -1,0 +1,13 @@
+∇ Variations(name t);ics;v
+ ⍝ Every variant of paste t must give the same calendar as t itself. (Whether that
+ ⍝ calendar is right is checked against the expected files, not here.)
+  :Trap 0
+      ics←Ics t
+  :Else
+      (name,': variants skipped, no calendar to compare with')(⊢Check)0
+      :Return
+  :EndTrap
+  :For v :In Variants
+      (name,': variant ',v)({ics Diff Ics v Vary ⍵}Check)t
+  :EndFor
+∇

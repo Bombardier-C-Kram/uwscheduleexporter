@@ -1,0 +1,8 @@
+Unrecognised←{
+⍝ Fields of paste ⍵ that are neither boilerplate nor shaped like schedule data.
+    t←ToLF ⍵
+    f←∪Trim¨(~t∊LF TAB)⊆t
+    f←f~(⊂''),(,¨Boilerplate),FakeStudent TBA   ⍝ ,¨: '|' is a scalar in Boilerplate.apla
+    f←f/⍨~IsFakeField¨f
+    f/⍨{0=≢Shapes ⎕S 0⊢⍵}¨f
+}

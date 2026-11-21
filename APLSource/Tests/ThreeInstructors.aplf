@@ -1,0 +1,15 @@
+ThreeInstructors←{
+⍝ '' if uwsch reads an instructor list split over three lines ('A,' 'B,' 'C') the
+⍝ way the reference model does. Made from fixture ⍵ by adding a third name after
+⍝ a two-instructor cell that is already split over two lines.
+    t←⍵
+    m←⊃{⍵/⍨','∊¨⍵}∪⊃,/{⍵.classes.instructor}¨RefParse t
+    a b←Trim¨','(≠⊆⊢)m
+    e←{⍵/⍨{∨/(a,',',⍵,b)⍷t}¨⍵}(CR LF)(,LF)(,CR)    ⍝ the line break between the names
+    0=≢e:'no split two-instructor cell in this fixture'
+    p←a,',',(⊃e),b
+    t←(p⎕R(p,',',(⊃e),'Third Person')⍠('Regex' 0)('Mode' 'D'))t
+    exp←⊃,/{⍵.classes.instructor}¨RefParse t
+    0=+/∨/¨'Third Person'∘⍷¨exp:'test setup failed: third name not added'
+    exp Diff2 ⊃,/{⍵.classes.instructor}¨⊃##.uwsch t
+}

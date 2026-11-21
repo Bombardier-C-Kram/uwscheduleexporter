@@ -1,0 +1,33 @@
+∇ (out map)←allow AnonymiseText raw;student;inst;real;fake;leaks;unk;err
+ ⍝ Replace the student's and instructors' names in raw paste raw.
+ ⍝ Signals unless every check passes. map: real names ,[1.5] fake names.
+  student←StudentName raw
+ ⍝ Names as the reference model reads them, plus any uwsch finds (it may be buggy)
+  inst←∪(Instructors RefParse raw),{0::⍬ ⋄ Instructors⊃##.uwsch ⍵}raw
+  real←(⊂student),inst
+  fake←(⊂FakeStudent),FakeNames inst
+  out←(real fake)Replace raw
+  err←⍬
+ ⍝ 1. No name, or any part of one, is left anywhere
+  :If 0<≢leaks←real Leaks out
+      err,←⊂'names still present: ',Quote leaks
+  :EndIf
+ ⍝ 2. Only the names changed: swapping back gives the original, byte for byte
+  :If raw≢(fake real)Replace out
+      err,←⊂'swapping names back does not restore the original (a fake name may clash with other text)'
+  :EndIf
+ ⍝ 3. The same schedule, apart from names, for both the reference model and uwsch
+ ⍝    (an error counts as a result: if uwsch fails on the paste it must fail the same way)
+  :If ((real fake)Replace RefDump raw)≢RefDump out
+  :OrIf ((real fake)Replace SafeDump raw)≢SafeDump out
+      err,←⊂'anonymising changed the parsed schedule'
+  :EndIf
+ ⍝ 4. Nothing we don't recognise, which could be personal data the parser doesn't know about
+  :If 0<≢unk←(Unrecognised out)~allow
+      err,←⊂'unrecognised text ',(Quote unk),'. If it is not personal data, pass it in the left argument to allow it'
+  :EndIf
+  :If 0<≢err
+      ('Not anonymised: ',⊃{⍺,'; ',⍵}/err)⎕SIGNAL 11
+  :EndIf
+  map←real,[1.5]fake
+∇
