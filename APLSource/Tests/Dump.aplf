@@ -1,0 +1,1 @@
+Dump←{ToLF ⎕JSON⍠'Compact' 0⊢⊃##.uwsch ⍵}     ⍝ parse, as diffable JSON (⎕JSON uses CR)

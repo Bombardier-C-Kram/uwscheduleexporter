@@ -1,0 +1,16 @@
+∇ c←ddmm HandBuilt rows;k;m
+ ⍝ A course namespace shaped like uwsch's. rows: (days starttime endtime start end
+ ⍝ component instructor), dates written DD/MM/YYYY and swapped if ~ddmm.
+  c←⎕NS'' ⋄ c.(code name)←'ECE 100' 'Signals & Systems @prof \0'
+  m←↑rows
+  k←⎕NS¨(≢rows)⍴⊂''
+  k.number←⍳≢rows
+  k.section←{¯3↑'00',⍕⍵}¨⍳≢rows
+  k.room←⊂'E7 5343'
+  k.days←m[;1] ⋄ k.starttime←m[;2] ⋄ k.endtime←m[;3]
+  k.start←m[;4] ⋄ k.end←m[;5] ⋄ k.component←m[;6] ⋄ k.instructor←m[;7]
+  :If ~ddmm
+      k.start←'swap-dates'∘Vary¨k.start ⋄ k.end←'swap-dates'∘Vary¨k.end
+  :EndIf
+  c.classes←k
+∇

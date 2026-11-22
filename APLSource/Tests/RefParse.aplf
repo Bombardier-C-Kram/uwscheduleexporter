@@ -1,0 +1,43 @@
+∇ courses←RefParse paste;c;i;k;row;cur;inst;n
+ ⍝ An independent reading of a Quest paste, written from what the page shows and
+ ⍝ not from uwsch/ical: a plain cell-by-cell walk of the table. Continuation rows
+ ⍝ (blank Class Nbr/Section/Component) belong to the class above them, and an
+ ⍝ instructor cell holds one or more names, given here as 'A' or 'A, B'.
+  c←Cells paste
+  courses←⍬ ⋄ i←1
+  :While i≤≢c
+      :If ~IsCourse i⊃c ⋄ ('Expected a course heading, found "',(i⊃c),'"')⎕SIGNAL 11 ⋄ :EndIf
+      ⍝ Column labels (some pastes have no Grade column), then the values in order
+      n←⊃⍸(i↓c)≡¨⊂'Deadlines'
+      :If (n=0)∨~∧/c[i+⍳n]∊'Status' 'Units' 'Grading' 'Grade' 'Deadlines'
+      :OrIf 'Status' 'Units' 'Grading'≢3↑c[i+⍳n]
+          'Unexpected course header layout'⎕SIGNAL 11
+      :EndIf
+      k←⎕NS''
+      k.(code name)←' - 'SplitAt i⊃c
+      k.status←(i+n+1)⊃c
+      k.units←⊃2⊃⎕VFI(i+n+2)⊃c
+      k.grading←(i+n+3)⊃c
+      :If 0=n←⊃⍸(i↓c)≡¨⊂'Start/End Date' ⋄ 'No class table'⎕SIGNAL 11 ⋄ :EndIf
+      i←i+n+1
+      k.classes←⍬ ⋄ cur←⍬
+      :While i≤≢c
+          :If IsCourse i⊃c ⋄ :Leave ⋄ :EndIf
+          :If IsNumber i⊃c                  ⍝ Class Nbr, Section, Component
+              cur←(⍎i⊃c)((i+1)⊃c)((i+2)⊃c) ⋄ i+←3
+          :ElseIf 0=≢cur
+              'Meeting row before any class'⎕SIGNAL 11
+          :EndIf
+          row←⎕NS''
+          row.(number section component)←cur
+          row.(days starttime endtime)←DaysTimes i⊃c
+          row.room←(i+1)⊃c ⋄ i+←2
+          inst←⍬
+          :While ~IsDates i⊃c ⋄ inst,←⊂i⊃c ⋄ i+←1 ⋄ :EndWhile
+          row.instructor←JoinNames inst
+          row.(start end)←' - 'SplitAt i⊃c ⋄ i+←1
+          k.classes,←row
+      :EndWhile
+      courses,←k
+  :EndWhile
+∇

@@ -1,0 +1,18 @@
+∇ lines←RefEvents paste;courses;ddmm;k;c;sum;desc;s;e;d;t0;t1
+ ⍝ Every class meeting the paste describes, as sorted EventLines, using Templates.
+  courses←RefParse paste
+  ddmm←RefDateFormat courses
+  lines←⍬
+  :For k :In courses
+      :For c :In k.classes
+          :If 0=≢c.starttime ⋄ :Continue ⋄ :EndIf     ⍝ TBA: nothing to put in a calendar
+          sum desc←(k.code c.section k.name c.component c.room c.instructor)∘Fill¨Templates
+          s e←ddmm∘DayNum¨c.(start end)
+          d←(s-1)+⍳1+e-s
+          d←d/⍨(7|d)∊WeekDays c.days
+          t0 t1←Minutes¨c.(starttime endtime)
+          lines,←{EventLine ⍵ t0 t1 sum desc}¨d,⍬
+      :EndFor
+  :EndFor
+  lines←lines[⍋lines]
+∇

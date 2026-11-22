@@ -1,0 +1,11 @@
+Describe←{
+⍝ Fixture name from content: <term><year>-<ddmm|mmdd>-<12h|24h>-<lf|crlf|cr>-<plain|tabbed>
+    t←ToLF ⍵
+    term←'(Spring|Fall|Winter) (\d{4}) \|'⎕S'\1\2'⊢t
+    term←{0=≢⍵:'unknown' ⋄ ⎕C⊃⍵}term
+    dates←(1+##.detectDateFormat t)⊃'mmdd' 'ddmm'
+    clock←(1+0<≢'\d[AP]M\b'⎕S 0⊢t)⊃'24h' '12h'
+    eol←⊃'crlf' 'cr' 'lf'/⍨(∨/(CR LF)⍷⍵),(CR∊⍵),1
+    layout←(1+∨/('Class Nbr ',TAB)⍷t)⊃'plain' 'tabbed'
+    ¯1↓∊term dates clock eol layout,¨'-'
+}

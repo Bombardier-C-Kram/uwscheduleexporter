@@ -1,0 +1,11 @@
+(
+  ⍝ Metamorphic variants: rewrites of a paste that must not change the calendar (see Vary).
+  'lf'
+  'crlf'
+  'cr'
+  'swap-dates'
+  '12h'
+  '24h'
+  'no-empty-lines'
+  'surrounding-text'
+)

@@ -1,0 +1,6 @@
+RefDates←{
+⍝ RefDateFormat of one course whose classes have the dates ⍵ (for unit tests)
+    c←⎕NS'' ⋄ k←⎕NS¨(≢⍵)⍴⊂''
+    k.start←⍵ ⋄ k.end←⍵ ⋄ c.classes←k
+    RefDateFormat,c
+}

@@ -1,0 +1,8 @@
+Replace←{
+⍝ ⍺ is (from to): swap each string in from for the matching one in to, literally,
+⍝ in a single pass. Longest first, so 'Ann Lau' can't replace the front of 'Ann Lauritzen'.
+    from to←⍺
+    0=≢from:⍵
+    o←⍒≢¨from
+    ((from[o])⎕R(to[o])⍠'Regex' 0)⍵
+}

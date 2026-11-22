@@ -1,0 +1,1 @@
+SafeDump←{0::'error: ',⎕DMX.EM ⋄ Dump ⍵}

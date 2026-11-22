@@ -1,0 +1,15 @@
+∇ fakes←FakeWords words;w;k;f
+ ⍝ For each word, the next PoolPlus entry reshaped to its length, skipping any
+ ⍝ already used or equal to a real word. The choice depends only on the order
+ ⍝ the words appear in, not on the words, so it can't be reversed by trying a
+ ⍝ list of staff names.
+  fakes←⍬ ⋄ k←0
+  :For w :In words
+      :Repeat
+          k+←1
+          :If k>≢PoolPlus ⋄ 'Ran out of fake words'⎕SIGNAL 11 ⋄ :EndIf
+          f←(≢w)⍴k⊃PoolPlus
+      :Until ~(⊂⎕C f)∊⎕C¨fakes,words
+      fakes,←⊂f
+  :EndFor
+∇

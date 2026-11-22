@@ -1,31 +1,20 @@
 detectDateFormat←{
-    ⍝ Extract all date patterns from input
-    pattern←'\b(\d{1,2})[/\-.](\d{1,2})[/\-.](\d{4})\b'
-    matches←pattern ⎕S '\0'⊢⍵
+    ⍝ 1 if the dates in schedule text ⍵ are DD/MM/YYYY, 0 if MM/DD/YYYY:
+    ⍝ whichever reading gives a real date for every one of them.
+    dates←'\b\d{1,2}/\d{1,2}/\d{4}\b'⎕S'&'⊢⍵
 
     ⍝ Return early if no dates found
-    0=≢matches:'NO_DATES' ⎕SIGNAL 100
+    0=≢dates:'NO_DATES'⎕SIGNAL 100
 
-    ⍝ Extract first and second numbers from each date
-    first second←↓⍉0 ¯1↓↑'/'(2⊃⎕VFI)¨matches
+    ⍝ ⎕DT validate mode (target 0): 1 for each real date, 0 for month 13, 31 February, ...
+    mmdd ddmm←{∧/(⍵ 0)⎕DT dates}¨'M/D/YYYY' 'D/M/YYYY'
 
-    ⍝ Identify dates that disambiguate the format
-    ⍝ If first > 12: must be DD/MM/YYYY
-    ⍝ If second > 12: must be MM/DD/YYYY
-    ddmm←first>12
-    mmdd←second>12
+    ⍝ Both readings work: no date has a day after the 12th
+    ddmm∧mmdd:'AMBIGUOUS'⎕SIGNAL 100
 
-    ⍝ Determine format based on evidence
-    hasDD←∨/ddmm
-    hasMM←∨/mmdd
+    ddmm:1
+    mmdd:0
 
-    ⍝ Both formats detected = inconsistent/error
-    hasDD∧hasMM:'INCONSISTENT Dates' ⎕SIGNAL 100
-
-    ⍝ Clear evidence for one format
-    hasDD:1
-    hasMM:0
-
-    ⍝ No disambiguating dates found (all dates have both parts ≤ 12)
-    'AMBIGUOUS' ⎕SIGNAL 100
+    ⍝ Neither works: the dates are a mix of both formats, or impossible
+    'INCONSISTENT Dates'⎕SIGNAL 100
 }

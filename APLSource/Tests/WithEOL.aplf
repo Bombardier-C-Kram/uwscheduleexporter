@@ -1,0 +1,1 @@
+WithEOL←{t←ToLF ⍵ ⋄ ∊(⊂⍺)@(⍸t=LF)⊢,¨t}

@@ -1,0 +1,9 @@
+PersonalData←{
+⍝ '' if fixture ⍵ only names the fake student and fake instructors.
+⍝ Never print the names it finds: test output can end up in public CI logs.
+    FakeStudent≢StudentName ⍵:'student name is not "',FakeStudent,'"'
+    w←∪⊃,/{⍵⊆⍨~⍵∊' -,'}¨Instructors⊃##.uwsch ⍵
+    bad←w/⍨~IsFakeWord¨w
+    0<≢bad:(⍕≢bad),' instructor name word(s) not made from Tests.Pool'
+    ''
+}

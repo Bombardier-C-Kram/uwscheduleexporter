@@ -1,0 +1,1 @@
+Unmap←{((⍺[;2])(⍺[;1]))Replace ⍵}   ⍝ ⍺: map from AnonymiseText

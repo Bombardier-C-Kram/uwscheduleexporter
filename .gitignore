@@ -5,3 +5,6 @@ deps/**/
 *.txt
 .claude/
 .devcontainer/
+# Raw Quest pastes (tests/*.txt) contain real names and stay ignored by *.txt above.
+# Anonymised fixtures made with Tests.Anonymise are safe to commit.
+!tests/fixtures/*.txt

@@ -1,0 +1,18 @@
+∇ FixtureTests file;t;base;name;f0
+  f0←Failed
+  t←ReadRaw file
+  base←¯4↓file
+  name←⊃⌽'/'(≠⊆⊢)base
+  (name,': contains no real names')(PersonalData Check)t
+  :If f0≠Failed   ⍝ the diffs below would print the names: keep them out of CI logs
+      Say'  (other checks for ',name,' skipped)' ⋄ :Return
+  :EndIf
+  (name,': .json and .events are what the reference model says')(base∘Current Check)t
+  (name,': parse matches .json')({(ReadRaw base,'.json')Diff Dump ⍵}Check)t
+ ⍝ Times and text are separate checks, so a known text bug can't hide a new timing bug
+  (name,': meeting dates and times match .events')({(When ReadRaw base,'.events')Diff When Events Ics ⍵}Check)t
+  (name,': meeting summaries and descriptions match .events')({(ReadRaw base,'.events')Diff Events Ics ⍵}Check)t
+  (name,': calendar follows RFC 5545')({RfcProblems Ics ⍵}Check)t
+  Variations name t
+  :If f0=Failed ⋄ Say'  ok ',name ⋄ :EndIf
+∇

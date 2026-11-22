@@ -1,0 +1,1 @@
+Ics←{(c df)←##.uwsch ⍵ ⋄ (Templates,df)##.ical c}

@@ -1,0 +1,1 @@
+DayNum←{(((1+⍺)⊃'MM/DD/YYYY' 'DD/MM/YYYY')1)⎕DT⊂⍵}    ⍝ ⍺: 1 if DD/MM

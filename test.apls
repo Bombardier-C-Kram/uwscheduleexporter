@@ -1,0 +1,6 @@
+#!/usr/bin/env dyalogscript
+⍝ Run the test suite from the repository root; exit code 0 if everything passed.
+⎕SE.(⍎⊃2⎕FIX'/StartupSession.aplf',⍨2⎕NQ#'GetEnvironment' 'DYALOG')
+{}⎕SE.Link.Import '#' './APLSource'
+code←~#.Tests.Run
+⎕OFF code   ⍝ not "⎕OFF ~#.Tests.Run": that always exits 0

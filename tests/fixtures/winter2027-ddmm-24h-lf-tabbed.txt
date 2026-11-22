@@ -1,0 +1,1062 @@
+
+											
+	
+	
+	
+						
+	
+				
+	
+GO!
+	
+	
+Go To
+	
+Test Student
+	
+	
+My Academics
+	
+Course Selection (Undergrad only)
+	
+Search for Classes
+	
+	
+	
+	
+  	My Class Schedule 	 	  	| 	 	  	Shopping Cart 	 	  	| 	 	  	Add 	 	  	| 	 	  	Drop 	 	  	| 	 	  	Swap 	 	  	| 	 	  	Edit 	 	  	| 	 	  	Term Information 	 	  	| 	 	  	Exam Information 	 
+		
+My Class Schedule
+	
+			
+	
+Select Display Option
+	
+List View
+	
+Weekly Calendar View
+	
+			
+	
+	
+Winter 2027 | Undergraduate | University of Waterloo
+	
+	
+Group Box
+		
+	
+Class Schedule Filter Options Collapsible section Class Schedule Filter Options 
+		
+	
+Show Enrolled Classes
+	
+Show Dropped Classes
+	
+Show Waitlisted Classes
+	
+	
+	
+	
+ECE 109 - Materials Chemistry for Eng
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.25
+	
+Numeric Grading Basis
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+4862
+	
+002
+	
+LEC
+	
+T 12:30 - 13:20
+	
+PSE 4043
+	
+Alde BirchBirchBi
+	
+19/01/2027 - 09/02/2027
+ 
+	  	
+ 
+	
+W 16:30 - 17:20
+	
+PSE 4043
+	
+Alde BirchBirchBi
+	
+20/01/2027 - 10/02/2027
+ 
+	  	
+ 
+	
+T 12:30 - 13:20
+	
+PSE 4043
+	
+Alde BirchBirchBi
+	
+09/03/2027 - 06/04/2027
+ 
+	  	
+ 
+	
+W 16:30 - 17:20
+	
+PSE 4043
+	
+Alde BirchBirchBi
+	
+10/03/2027 - 07/04/2027
+4864
+	
+102
+	
+TUT
+	
+F 08:30 - 09:20
+	
+PSE 5343
+	
+To be Announced
+	
+29/01/2027 - 29/01/2027
+ 
+	  	
+ 
+	
+F 08:30 - 09:20
+	
+PSE 5343
+	
+To be Announced
+	
+12/02/2027 - 12/02/2027
+ 
+	  	
+ 
+	
+F 08:30 - 09:20
+	
+PSE 5343
+	
+To be Announced
+	
+19/03/2027 - 19/03/2027
+ 
+	  	
+ 
+	
+F 08:30 - 09:20
+	
+PSE 5343
+	
+To be Announced
+	
+26/03/2027 - 26/03/2027
+ 
+	  	
+ 
+	
+F 08:30 - 09:20
+	
+PSE 5343
+	
+To be Announced
+	
+02/04/2027 - 02/04/2027
+ 
+	  	
+ 
+	
+F 08:30 - 09:20
+	
+PSE 5343
+	
+To be Announced
+	
+09/04/2027 - 09/04/2027
+	
+ECE 201 - Information Session
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.00
+	
+Non-Graded Component
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+4799
+	
+002
+	
+SEM
+	
+M 16:30 - 17:20
+	
+PSE 4053
+	
+To be Announced
+	
+18/01/2027 - 18/01/2027
+ 
+	  	
+ 
+	
+M 16:30 - 17:20
+	
+PSE 4053
+	
+To be Announced
+	
+08/02/2027 - 08/02/2027
+ 
+	  	
+ 
+	
+M 16:30 - 17:20
+	
+PSE 4053
+	
+To be Announced
+	
+08/03/2027 - 08/03/2027
+ 
+	  	
+ 
+	
+M 16:30 - 17:20
+	
+PSE 4053
+	
+To be Announced
+	
+29/03/2027 - 29/03/2027
+	
+ECE 204 - Numerical Methods
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.50
+	
+Numeric Grading Basis
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+4795
+	
+002
+	
+LEC
+	
+M 14:30 - 15:20
+	
+PSE 4043
+	
+CedarCe Dogwood EbonyE
+	
+11/01/2027 - 12/04/2027
+ 
+	  	
+ 
+	
+W 13:30 - 14:20
+	
+PSE 4043
+	
+CedarCe Dogwood EbonyE
+	
+11/01/2027 - 12/04/2027
+ 
+	  	
+ 
+	
+F 15:30 - 16:20
+	
+PSE 4043
+	
+CedarCe Dogwood EbonyE
+	
+11/01/2027 - 12/04/2027
+ 
+	  	
+ 
+	
+T 15:30 - 16:20
+	
+PSE 4043
+	
+CedarCe Dogwood EbonyE
+	
+19/01/2027 - 19/01/2027
+ 
+	  	
+ 
+	
+T 15:30 - 16:20
+	
+PSE 4043
+	
+CedarCe Dogwood EbonyE
+	
+02/02/2027 - 02/02/2027
+ 
+	  	
+ 
+	
+T 15:30 - 16:20
+	
+PSE 4043
+	
+CedarCe Dogwood EbonyE
+	
+23/02/2027 - 23/02/2027
+ 
+	  	
+ 
+	
+T 15:30 - 16:20
+	
+PSE 4043
+	
+CedarCe Dogwood EbonyE
+	
+09/03/2027 - 09/03/2027
+ 
+	  	
+ 
+	
+T 15:30 - 16:20
+	
+PSE 4043
+	
+CedarCe Dogwood EbonyE
+	
+23/03/2027 - 23/03/2027
+ 
+	  	
+ 
+	
+T 15:30 - 16:20
+	
+PSE 4043
+	
+CedarCe Dogwood EbonyE
+	
+06/04/2027 - 06/04/2027
+4797
+	
+102
+	
+TUT
+	
+M 15:30 - 16:20
+	
+PSE 4043
+	
+To be Announced
+	
+11/01/2027 - 12/04/2027
+5107
+	
+208
+	
+LAB
+	
+W 08:30 - 11:20
+	
+E2 3339
+	
+To be Announced
+	
+27/01/2027 - 27/01/2027
+ 
+	  	
+ 
+	
+W 08:30 - 11:20
+	
+E2 3339
+	
+To be Announced
+	
+10/02/2027 - 10/02/2027
+ 
+	  	
+ 
+	
+W 08:30 - 11:20
+	
+E2 3339
+	
+To be Announced
+	
+10/03/2027 - 10/03/2027
+ 
+	  	
+ 
+	
+W 08:30 - 11:20
+	
+E2 3339
+	
+To be Announced
+	
+24/03/2027 - 24/03/2027
+ 
+	  	
+ 
+	
+W 08:30 - 11:20
+	
+E2 3339
+	
+To be Announced
+	
+07/04/2027 - 07/04/2027
+	
+ECE 205 - Adv Calculus 1 (ECE)
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.50
+	
+Numeric Grading Basis
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+4635
+	
+002
+	
+LEC
+	
+T 13:30 - 14:20
+	
+PSE 4043
+	
+Gink HemlockH
+	
+11/01/2027 - 12/04/2027
+ 
+	  	
+ 
+	
+Th 15:30 - 16:20
+	
+PSE 4043
+	
+Gink HemlockH
+	
+11/01/2027 - 12/04/2027
+ 
+	  	
+ 
+	
+F 14:30 - 15:20
+	
+PSE 4043
+	
+Gink HemlockH
+	
+11/01/2027 - 12/04/2027
+ 
+	  	
+ 
+	
+W 15:30 - 16:20
+	
+PSE 4043
+	
+Gink HemlockH
+	
+13/01/2027 - 13/01/2027
+ 
+	  	
+ 
+	
+W 15:30 - 16:20
+	
+PSE 4043
+	
+Gink HemlockH
+	
+27/01/2027 - 27/01/2027
+ 
+	  	
+ 
+	
+W 15:30 - 16:20
+	
+PSE 4043
+	
+Gink HemlockH
+	
+10/02/2027 - 10/02/2027
+ 
+	  	
+ 
+	
+W 15:30 - 16:20
+	
+PSE 4043
+	
+Gink HemlockH
+	
+03/03/2027 - 03/03/2027
+ 
+	  	
+ 
+	
+W 15:30 - 16:20
+	
+PSE 4043
+	
+Gink HemlockH
+	
+17/03/2027 - 17/03/2027
+ 
+	  	
+ 
+	
+W 15:30 - 16:20
+	
+PSE 4043
+	
+Gink HemlockH
+	
+31/03/2027 - 31/03/2027
+4636
+	
+102
+	
+TUT
+	
+T 16:30 - 17:20
+	
+PSE 4043
+	
+To be Announced
+	
+11/01/2027 - 12/04/2027
+	
+ECE 222 - Digital Computers
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.50
+	
+Numeric Grading Basis
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+5207
+	
+208
+	
+LAB
+	
+T 08:30 - 11:20
+	
+E2 2356
+	
+Hickor IronwoodIr-Juniper
+	
+19/01/2027 - 19/01/2027
+ 
+	  	
+ 
+	
+T 08:30 - 11:20
+	
+E2 2356
+	
+Hickor IronwoodIr-Juniper
+	
+02/02/2027 - 02/02/2027
+ 
+	  	
+ 
+	
+T 08:30 - 11:20
+	
+E2 2356
+	
+Hickor IronwoodIr-Juniper
+	
+23/02/2027 - 23/02/2027
+ 
+	  	
+ 
+	
+T 08:30 - 11:20
+	
+E2 2356
+	
+Hickor IronwoodIr-Juniper
+	
+16/03/2027 - 16/03/2027
+ 
+	  	
+ 
+	
+T 08:30 - 11:20
+	
+E2 2356
+	
+Hickor IronwoodIr-Juniper
+	
+30/03/2027 - 30/03/2027
+4579
+	
+002
+	
+LEC
+	
+MWF 12:30 - 13:20
+	
+PSE 4043
+	
+To be Announced
+	
+11/01/2027 - 12/04/2027
+ 
+	  	
+ 
+	
+Th 12:30 - 13:20
+	
+PSE 4043
+	
+To be Announced
+	
+21/01/2027 - 21/01/2027
+ 
+	  	
+ 
+	
+Th 12:30 - 13:20
+	
+PSE 4043
+	
+To be Announced
+	
+04/02/2027 - 04/02/2027
+ 
+	  	
+ 
+	
+Th 12:30 - 13:20
+	
+PSE 4043
+	
+To be Announced
+	
+25/02/2027 - 25/02/2027
+ 
+	  	
+ 
+	
+Th 12:30 - 13:20
+	
+PSE 4043
+	
+To be Announced
+	
+11/03/2027 - 11/03/2027
+ 
+	  	
+ 
+	
+Th 12:30 - 13:20
+	
+PSE 4043
+	
+To be Announced
+	
+25/03/2027 - 25/03/2027
+ 
+	  	
+ 
+	
+Th 12:30 - 13:20
+	
+PSE 4043
+	
+To be Announced
+	
+08/04/2027 - 08/04/2027
+4580
+	
+102
+	
+TUT
+	
+F 10:30 - 11:20
+	
+PSE 5343
+	
+To be Announced
+	
+11/01/2027 - 12/04/2027
+	
+ECE 240 - Electronic Circuits 1
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.50
+	
+Numeric Grading Basis
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+4586
+	
+002
+	
+LEC
+	
+MThF 13:30 - 14:20
+	
+PSE 4043
+	
+Katsu La
+	
+11/01/2027 - 12/04/2027
+ 
+	  	
+ 
+	
+W 15:30 - 16:20
+	
+PSE 4043
+	
+Katsu La
+	
+20/01/2027 - 20/01/2027
+ 
+	  	
+ 
+	
+W 15:30 - 16:20
+	
+PSE 4043
+	
+Katsu La
+	
+03/02/2027 - 03/02/2027
+ 
+	  	
+ 
+	
+W 15:30 - 16:20
+	
+PSE 4043
+	
+Katsu La
+	
+24/02/2027 - 24/02/2027
+ 
+	  	
+ 
+	
+W 15:30 - 16:20
+	
+PSE 4043
+	
+Katsu La
+	
+10/03/2027 - 10/03/2027
+ 
+	  	
+ 
+	
+W 15:30 - 16:20
+	
+PSE 4043
+	
+Katsu La
+	
+24/03/2027 - 24/03/2027
+ 
+	  	
+ 
+	
+W 15:30 - 16:20
+	
+PSE 4043
+	
+Katsu La
+	
+07/04/2027 - 07/04/2027
+4587
+	
+102
+	
+TUT
+	
+F 09:30 - 10:20
+	
+PSE 5343
+	
+To be Announced
+	
+11/01/2027 - 12/04/2027
+5108
+	
+208
+	
+LAB
+	
+Th 08:30 - 11:20
+	
+E2 3347
+	
+To be Announced
+	
+28/01/2027 - 28/01/2027
+ 
+	  	
+ 
+	
+Th 08:30 - 11:20
+	
+E2 3347
+	
+To be Announced
+	
+11/02/2027 - 11/02/2027
+ 
+	  	
+ 
+	
+Th 08:30 - 11:20
+	
+E2 3347
+	
+To be Announced
+	
+11/03/2027 - 11/03/2027
+ 
+	  	
+ 
+	
+Th 08:30 - 11:20
+	
+E2 3347
+	
+To be Announced
+	
+25/03/2027 - 25/03/2027
+ 
+	  	
+ 
+	
+Th 08:30 - 11:20
+	
+E2 3347
+	
+To be Announced
+	
+08/04/2027 - 08/04/2027
+	
+ECE 250 - Algorithms & Data Structures
+		
+	
+Status 	Units 	Grading 	Grade 	Deadlines
+Enrolled
+	
+0.50
+	
+Numeric Grading Basis
+	
+	
+Academic Calendar Deadlines
+	
+Class Nbr 	Section 	Component 	Days & Times 	Room 	Instructor 	Start/End Date
+4470
+	
+002
+	
+LEC
+	
+TWTh 14:30 - 15:20
+	
+PSE 4043
+	
+Maple MahoganyMa
+	
+11/01/2027 - 12/04/2027
+ 
+	  	
+ 
+	
+Th 12:30 - 13:20
+	
+PSE 4043
+	
+Maple MahoganyMa
+	
+14/01/2027 - 14/01/2027
+ 
+	  	
+ 
+	
+Th 12:30 - 13:20
+	
+PSE 4043
+	
+Maple MahoganyMa
+	
+28/01/2027 - 28/01/2027
+ 
+	  	
+ 
+	
+Th 12:30 - 13:20
+	
+PSE 4043
+	
+Maple MahoganyMa
+	
+11/02/2027 - 11/02/2027
+ 
+	  	
+ 
+	
+Th 12:30 - 13:20
+	
+PSE 4043
+	
+Maple MahoganyMa
+	
+04/03/2027 - 04/03/2027
+ 
+	  	
+ 
+	
+Th 12:30 - 13:20
+	
+PSE 4043
+	
+Maple MahoganyMa
+	
+18/03/2027 - 18/03/2027
+ 
+	  	
+ 
+	
+Th 12:30 - 13:20
+	
+PSE 4043
+	
+Maple MahoganyMa
+	
+01/04/2027 - 01/04/2027
+4471
+	
+102
+	
+TUT
+	
+Th 16:30 - 17:20
+	
+PSE 5343
+	
+To be Announced
+	
+11/01/2027 - 12/04/2027
+5215
+	
+208
+	
+LAB
+	
+W 08:30 - 11:20
+	
+E2 3339
+	
+Nutm Poplar-QuinceQuin
+	
+20/01/2027 - 20/01/2027
+ 
+	  	
+ 
+	
+W 08:30 - 11:20
+	
+E2 3339
+	
+Nutm Poplar-QuinceQuin
+	
+03/02/2027 - 03/02/2027
+ 
+	  	
+ 
+	
+W 08:30 - 11:20
+	
+E2 3339
+	
+Nutm Poplar-QuinceQuin
+	
+24/02/2027 - 24/02/2027
+ 
+	  	
+ 
+	
+W 08:30 - 11:20
+	
+E2 3339
+	
+Nutm Poplar-QuinceQuin
+	
+17/03/2027 - 17/03/2027
+ 
+	  	
+ 
+	
+W 08:30 - 11:20
+	
+E2 3339
+	
+Nutm Poplar-QuinceQuin
+	
+31/03/2027 - 31/03/2027
+	
+Printer Friendly Page
+	
+				
+	
+	
+Go to top iconGo to top

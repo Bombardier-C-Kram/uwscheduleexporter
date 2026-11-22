@@ -1,0 +1,48 @@
+∇ ok←Run;Passed;Failed;f;raw
+ ⍝ Test suite and fixture tooling for the UW Schedule Exporter.
+ ⍝
+ ⍝ Real Quest pastes can't be committed: they name the student and the instructors.
+ ⍝ Committed fixtures are anonymised copies, made with Anonymise:
+ ⍝
+ ⍝   tests/*.txt             raw pastes. Real names: gitignored, never commit.
+ ⍝   tests/fixtures/X.txt    anonymised paste, byte-for-byte the same apart from names
+ ⍝   tests/fixtures/X.json   expected parse              } written by the reference
+ ⍝   tests/fixtures/X.events expected class meetings     } model, never by uwsch/ical
+ ⍝
+ ⍝ Expected values never come from the code under test. They come from a separate,
+ ⍝ deliberately plain reference model (RefParse, RefEvents), so a bug in uwsch or
+ ⍝ ical makes a test fail instead of becoming the expected output. Calendars are
+ ⍝ compared by meaning (IcsEvents expands them into meetings), not byte for byte,
+ ⍝ and checked separately against RFC 5545 (RfcProblems).
+ ⍝
+ ⍝ Fixture names come from their content, so the list of names shows what is covered:
+ ⍝   <term><year>-<ddmm|mmdd>-<12h|24h>-<lf|crlf|cr>-<plain|tabbed>[-n].txt
+ ⍝ (plain/tabbed are the two paste layouts seen so far; tabbed puts a tab-only line
+ ⍝ between fields. Which one you get seems to depend on the browser.)
+ ⍝
+ ⍝ Fixtures are deliberately NOT normalised: odd whitespace and line endings are what
+ ⍝ the parser has to cope with. Instead every fixture is also run through regular
+ ⍝ variants (see Variants) that must all produce the same calendar.
+ ⍝
+ ⍝ Usage, from the repository root:
+ ⍝   Tests.Run                          run everything; returns 1 if all passed
+ ⍝   Tests.Anonymise 'tests/raw.txt'    raw paste → fixture + expected files
+ ⍝   Tests.WriteExpected ''             rewrite expected files from the reference model
+ ⍝
+  Passed←Failed←0
+  Say'Unit tests'
+  UnitTests
+  :If 0=Failed ⋄ Say'  ok (',(⍕Passed),' checks)' ⋄ :EndIf
+  Say'Fixtures (',(⍕≢Fixtures),')'
+  :For f :In Fixtures
+      FixtureTests f
+  :EndFor
+  :If 0<≢raw←LocalRaw
+      Say'Local raw pastes (',(⍕≢raw),', not committed)'
+      :For f :In raw
+          RawTests f
+      :EndFor
+  :EndIf
+  Say(⍕Passed),' passed, ',(⍕Failed),' failed'
+  ok←0=Failed
+∇

@@ -1,0 +1,11 @@
+∇ cells←Cells paste;t;i;j
+ ⍝ The non-blank cells of the schedule part of paste, trimmed, in order.
+  t←ToLF paste
+  i←⊃⍸'Show Waitlisted Classes'⍷t
+  j←⊃⍸'Printer Friendly Page'⍷t
+  :If (0∊i j)∨j≤i
+      'Cannot find the schedule (between "Show Waitlisted Classes" and "Printer Friendly Page")'⎕SIGNAL 11
+  :EndIf
+  t←(i+22)↓(j-1)↑t
+  cells←(Trim¨(~t∊LF TAB)⊆t)~⊂''
+∇

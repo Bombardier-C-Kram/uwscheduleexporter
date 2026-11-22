@@ -1,0 +1,5 @@
+Unfold←{
+⍝ Content lines of calendar ⍵, unfolded (RFC 5545 3.1); any line ending accepted
+    t←('\n[ \t]'⎕R''⍠'Mode' 'D')ToLF ⍵
+    t⊆⍨t≠LF
+}

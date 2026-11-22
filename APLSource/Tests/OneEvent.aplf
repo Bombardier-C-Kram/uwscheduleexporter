@@ -1,0 +1,29 @@
+∇ lines←OneEvent props;p;get;one;s;len;sum;desc;starts;r;keys;vals;until;by;d0;tod;d;ex
+  p←Prop¨props
+  get←{(⍵∘≡¨⊃¨p)/p}
+  one←{1≠≢x←get ⍵:('Need exactly one ',⍵)⎕SIGNAL 11 ⋄ ⊃x}
+  s←DateTime 1↓one'DTSTART'
+  len←(DateTime 1↓one'DTEND')-s
+  sum←{0=≢⍵:'' ⋄ Unescape 3⊃⊃⍵}get'SUMMARY'
+  desc←{0=≢⍵:'' ⋄ Unescape 3⊃⊃⍵}get'DESCRIPTION'
+  starts←,s
+  :If 0<≢r←get'RRULE'
+      keys vals←↓⍉↑{i←⍵⍳'=' ⋄ ((i-1)↑⍵)(i↓⍵)}¨';'(≠⊆⊢)3⊃⊃r
+      :If ∨/~keys∊'FREQ' 'UNTIL' 'BYDAY' 'WKST' 'INTERVAL'
+      :OrIf 'WEEKLY'≢vals⊃⍨keys⍳⊂'FREQ'
+      :OrIf (,'1')≢(vals,⊂,'1')⊃⍨keys⍳⊂'INTERVAL'
+      :OrIf ~(⊂'UNTIL')∊keys
+          ('RRULE not understood by the tests: ',3⊃⊃r)⎕SIGNAL 11
+      :EndIf
+      until←DateTime ⍬(vals⊃⍨keys⍳⊂'UNTIL')
+      d0←⌊s÷1440 ⋄ tod←1440|s
+      by←{0=≢⍵:7|d0 ⋄ 0 1 2 3 4 5 6['SU' 'MO' 'TU' 'WE' 'TH' 'FR' 'SA'⍳','(≠⊆⊢)⍵]}(vals,⊂'')⊃⍨keys⍳⊂'BYDAY'
+      d←d0+⍳0⌈(⌊until÷1440)-d0
+      d←d/⍨((7|d)∊by)∧until≥tod+1440×d
+      starts←∪starts,tod+1440×d
+  :EndIf
+  :For ex :In get'EXDATE'     ⍝ (not ¨: on an empty list it would run on a blank prototype)
+      starts~←{DateTime(2⊃ex)⍵}¨','(≠⊆⊢)3⊃ex
+  :EndFor
+  lines←{EventLine(⌊⍵÷1440)(1440|⍵)((1440|⍵)+len)sum desc}¨starts
+∇

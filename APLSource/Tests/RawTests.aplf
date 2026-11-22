@@ -1,0 +1,11 @@
+∇ RawTests file;t;name;f0
+ ⍝ Raw pastes have no expected files: compare with the reference model directly.
+  f0←Failed
+  t←ReadRaw file
+  name←⊃⌽'/'(≠⊆⊢)file
+  (name,': parse matches reference model')({(RefDump ⍵)Diff Dump ⍵}Check)t
+  (name,': meeting dates and times match reference model')({(When Lines RefEvents ⍵)Diff When Events Ics ⍵}Check)t
+  (name,': meeting summaries and descriptions match reference model')({(Lines RefEvents ⍵)Diff Events Ics ⍵}Check)t
+  Variations name t
+  :If f0=Failed ⋄ Say'  ok ',name ⋄ :EndIf
+∇

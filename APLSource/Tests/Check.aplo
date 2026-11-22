@@ -1,0 +1,15 @@
+∇ name(fn Check)arg;r
+ ⍝ Run one check. fn returns 1 or '' for a pass, 0 or a message for a failure.
+ ⍝ An error is a failure too.
+  :Trap 0
+      r←fn arg
+  :Else
+      r←⎕DMX.(EM,(0<≢Message)/': ',Message)
+  :EndTrap
+  :If (r≡1)∨(0=≢r)∧0≠≡r
+      Passed+←1
+  :Else
+      Failed+←1
+      Say'  FAIL ',name,(0≠≡r)/': ',r
+  :EndIf
+∇

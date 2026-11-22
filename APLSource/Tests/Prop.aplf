@@ -1,0 +1,6 @@
+Prop←{
+⍝ 'NAME;P=x:value' → 'NAME' ('P=x' ...) 'value'
+    i←⍵⍳':'
+    h←';'(≠⊆⊢)(i-1)↑⍵
+    (1 ⎕C⊃h)(1↓h)(i↓⍵)
+}

@@ -1,0 +1,7 @@
+TorontoFromUTC←{
+⍝ UTC minutes → Toronto minutes. DST: 2nd Sunday of March to 1st Sunday of November, at 2am local.
+    y←⍎∊'YYYY'(1200⌶)⌊⍵÷1440
+    Sun←{f←1 ⎕DT⊂y ⍺ 1 ⋄ f+(7|-f)+7×⍵-1}
+    dst←(⍵≥(1440×3 Sun 2)+7×60)∧⍵<(1440×11 Sun 1)+6×60
+    ⍵-60×5-dst
+}

@@ -1,0 +1,14 @@
+∇ r←AnonymiserTest file;t;fakes;planted;out;map;allow
+ ⍝ Plant a student name and instructor names (one a prefix of another, so
+ ⍝ replacement order matters) into a fixture, anonymise, and check they're gone.
+  t←ReadRaw file
+  allow←Unrecognised t
+  fakes←2↑Instructors⊃##.uwsch t
+  planted←'Jane Quinn-Doe' 'Ann Lau' 'Ann Lauritzen'
+  t←(((⊂FakeStudent),fakes)planted)Replace t
+  (out map)←allow AnonymiseText t
+  r←''
+  r,←(0<≢planted Leaks out)/'planted names survived. '
+  r,←(FakeStudent≢StudentName out)/'student not replaced. '
+  r,←((Stable Ics t)≢map Unmap Stable Ics out)/'calendar changed. '
+∇

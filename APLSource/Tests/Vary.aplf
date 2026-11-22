@@ -1,0 +1,12 @@
+Vary←{
+    ⍺≡'lf':(,LF)WithEOL ⍵
+    ⍺≡'crlf':(CR LF)WithEOL ⍵
+    ⍺≡'cr':(,CR)WithEOL ⍵
+    ⍺≡'swap-dates':'\b(\d{1,2})/(\d{1,2})/(\d{4})\b'⎕R'\2/\1/\3'⊢⍵
+    ⍺≡'12h':'\b(\d{1,2}):(\d\d)\b'⎕R{h←⍎⍵ Group 1 ⋄ (⍕12-12|-h),':',(⍵ Group 2),(1+h≥12)⊃'AM' 'PM'}⊢⍵
+    ⍺≡'24h':'\b(\d{1,2}):(\d\d)([AP]M)'⎕R{h←(12|⍎⍵ Group 1)+12×'PM'≡⍵ Group 3 ⋄ (¯2↑'0',⍕h),':',⍵ Group 2}⊢⍵
+    ⍝ Only truly empty lines: whitespace-only lines are the blank cells of continuation rows
+    ⍺≡'no-empty-lines':¯1↓∊LF,⍨¨{⍵⊆⍨⍵≠LF}ToLF ⍵
+    ⍺≡'surrounding-text':'Some text before',LF,⍵,LF,'message.txt',LF,'8 Ko',LF
+    ('Unknown variant ',⍺)⎕SIGNAL 11
+}

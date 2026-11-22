@@ -13,17 +13,18 @@ COPY deps/ ./deps/
 
 # Copy APL source files
 COPY APLSource/ ./APLSource/
+COPY site/ ./site/
 COPY start.apls .
 COPY activate.apls .
 RUN chmod +x start.apls
 RUN dyalogscript activate.apls
 
-# Expose port 8080 for the web server
-EXPOSE 8080
+# Expose port 8111 for the web server
+EXPOSE 8111
 
 # Health check to verify the web server is running
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8080/ || exit 1
+    CMD curl -f http://localhost:8111/ || exit 1
 
 # Set the default command
 ENTRYPOINT ["/bin/env", "dyalogscript", "/app/start.apls"]

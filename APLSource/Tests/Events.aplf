@@ -1,0 +1,1 @@
+Events←{Lines IcsEvents ⍵}                      ⍝ the meetings in a calendar, as text

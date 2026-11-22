@@ -1,0 +1,535 @@
+
+ 
+GO!
+Go To
+Test Student
+My Academics
+Course Selection (Undergrad only)
+Search for Classes
+Enroll
+ 	My Class Schedule	 	 	|	 	 	Shopping Cart	 	 	|	 	 	Add	 	 	|	 	 	Drop	 	 	|	 	 	Swap	 	 	|	 	 	Edit	 	 	|	 	 	Term Information	 	 	|	 	 	Exam Information	 
+My Class Schedule
+Select Display Option
+List View
+Weekly Calendar View
+Fall 2025 | Undergraduate | University of Waterloo
+Group Box
+Class Schedule Filter Options Collapsible section Class Schedule Filter Options 
+Show Enrolled Classes
+Show Dropped Classes
+Show Waitlisted Classes
+ECE 105 - Classical Mechanics
+Status	Units	Grading	Deadlines
+Enrolled
+0.50
+Numeric Grading Basis
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+5677
+201
+TST
+Th 2:30PM - 4:20PM
+TBA
+To be Announced
+23/10/2025 - 23/10/2025
+4959
+001
+LEC
+MTh 9:30AM - 10:20AM
+E7 5353
+Alder BirchBi
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+T 1:30PM - 2:20PM
+E7 5353
+Alder BirchBi
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+T 12:30PM - 1:20PM
+E7 5353
+Alder BirchBi
+23/09/2025 - 23/09/2025
+ 
+ 	
+ 
+T 12:30PM - 1:20PM
+E7 5353
+Alder BirchBi
+07/10/2025 - 07/10/2025
+ 
+ 	
+ 
+MTh 9:30AM - 10:20AM
+E7 5353
+Alder BirchBi
+27/10/2025 - 02/12/2025
+ 
+ 	
+ 
+T 1:30PM - 2:20PM
+E7 5353
+Alder BirchBi
+27/10/2025 - 02/12/2025
+ 
+ 	
+ 
+T 12:30PM - 1:20PM
+E7 5353
+Alder BirchBi
+18/11/2025 - 18/11/2025
+4962
+102
+TUT
+F 2:30PM - 4:20PM
+QNC 1506
+To be Announced
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+F 2:30PM - 4:20PM
+QNC 1506
+To be Announced
+27/10/2025 - 02/12/2025
+ECE 150 - Fundamentals of Programming
+Status	Units	Grading	Deadlines
+Enrolled
+0.50
+Numeric Grading Basis
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+4904
+201
+LAB
+Th 12:30PM - 2:20PM
+E7 5353
+To be Announced
+04/09/2025 - 04/09/2025
+ 
+ 	
+ 
+W 8:30AM - 10:20AM
+E2 1792
+To be Announced
+10/09/2025 - 10/09/2025
+ 
+ 	
+ 
+Th 12:30PM - 2:20PM
+E7 5353
+To be Announced
+18/09/2025 - 18/09/2025
+ 
+ 	
+ 
+W 8:30AM - 10:20AM
+E2 1792
+To be Announced
+24/09/2025 - 24/09/2025
+ 
+ 	
+ 
+Th 12:30PM - 2:20PM
+E7 5353
+To be Announced
+02/10/2025 - 02/10/2025
+ 
+ 	
+ 
+W 8:30AM - 10:20AM
+E2 1792
+To be Announced
+08/10/2025 - 08/10/2025
+ 
+ 	
+ 
+Th 12:30PM - 2:20PM
+E7 5353
+To be Announced
+30/10/2025 - 30/10/2025
+ 
+ 	
+ 
+W 8:30AM - 10:20AM
+E2 1792
+To be Announced
+05/11/2025 - 05/11/2025
+ 
+ 	
+ 
+Th 12:30PM - 2:20PM
+E7 5353
+To be Announced
+13/11/2025 - 13/11/2025
+ 
+ 	
+ 
+W 8:30AM - 10:20AM
+E2 1792
+To be Announced
+19/11/2025 - 19/11/2025
+ 
+ 	
+ 
+Th 12:30PM - 2:20PM
+E7 5353
+To be Announced
+27/11/2025 - 27/11/2025
+4805
+001
+LEC
+M 8:30AM - 9:20AM
+E7 5353
+CedarCe Dogwood EbonyE
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+TTh 10:30AM - 11:20AM
+E7 5353
+CedarCe Dogwood EbonyE
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+F 4:30PM - 5:20PM
+E7 4053
+CedarCe Dogwood EbonyE
+12/09/2025 - 12/09/2025
+ 
+ 	
+ 
+F 4:30PM - 5:20PM
+E7 4053
+CedarCe Dogwood EbonyE
+03/10/2025 - 03/10/2025
+ 
+ 	
+ 
+W 2:30PM - 4:20PM
+TBA
+To be Announced
+22/10/2025 - 22/10/2025
+ 
+ 	
+ 
+M 8:30AM - 9:20AM
+E7 5353
+CedarCe Dogwood EbonyE
+27/10/2025 - 02/12/2025
+ 
+ 	
+ 
+TTh 10:30AM - 11:20AM
+E7 5353
+CedarCe Dogwood EbonyE
+27/10/2025 - 02/12/2025
+ 
+ 	
+ 
+F 4:30PM - 5:20PM
+E7 4053
+CedarCe Dogwood EbonyE
+07/11/2025 - 07/11/2025
+4808
+101
+TUT
+F 8:30AM - 9:20AM
+E7 5353
+To be Announced
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+F 8:30AM - 9:20AM
+E7 5353
+To be Announced
+27/10/2025 - 02/12/2025
+ECE 190 - Eng Profession & Practice
+Status	Units	Grading	Deadlines
+Enrolled
+0.25
+Numeric Grading Basis
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+5678
+101
+TST
+F 12:30PM - 2:20PM
+TBA
+Gin Hemlock
+24/10/2025 - 24/10/2025
+5135
+001
+LEC
+TTh 8:30AM - 9:20AM
+E7 5353
+Gin Hemlock
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+W 11:30AM - 12:20PM
+E7 5353
+Gin Hemlock
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+TTh 8:30AM - 9:20AM
+E7 5353
+Gin Hemlock
+27/10/2025 - 02/12/2025
+ 
+ 	
+ 
+W 11:30AM - 12:20PM
+E7 5353
+Gin Hemlock
+27/10/2025 - 02/12/2025
+ECE 198 - Project Studio
+Status	Units	Grading	Deadlines
+Enrolled
+0.25
+Numeric Grading Basis
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+5317
+001
+LAB
+W 4:30PM - 6:20PM
+E7 1427
+Hicko Ironw
+10/09/2025 - 10/09/2025
+ 
+ 	
+ 
+W 8:30AM - 10:20AM
+E2 1792
+Hicko Ironw
+17/09/2025 - 17/09/2025
+ 
+ 	
+ 
+W 4:30PM - 6:20PM
+E7 1427
+Hicko Ironw
+24/09/2025 - 24/09/2025
+ 
+ 	
+ 
+W 8:30AM - 10:20AM
+E2 1792
+Hicko Ironw
+01/10/2025 - 01/10/2025
+ 
+ 	
+ 
+W 4:30PM - 6:20PM
+E7 1427
+Hicko Ironw
+08/10/2025 - 08/10/2025
+ENGL 192 - Eng Comm (COMPE/ELE/MGTE)
+Status	Units	Grading	Deadlines
+Enrolled
+0.50
+Numeric Grading Basis
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+4236
+003
+LEC
+MW 1:00PM - 2:20PM
+HH 227
+Juniper Katsur
+03/09/2025 - 02/12/2025
+GENE 119 - First-Year Engineering Seminar
+Status	Units	Grading	Deadlines
+Enrolled
+0.00
+Non-Graded Component
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+4898
+002
+SEM
+F 9:30AM - 10:20AM
+E7 5353
+Larc MapleM,
+Mahog NutmegN
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+F 9:30AM - 10:20AM
+E7 5353
+Larc MapleM,
+Mahog NutmegN
+27/10/2025 - 02/12/2025
+MATH 115 - Linear Algebra (Eng)
+Status	Units	Grading	Deadlines
+Enrolled
+0.50
+Numeric Grading Basis
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+6211
+002
+LEC
+MWF 10:30AM - 11:20AM
+E7 5353
+Popl QuinceQu
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+T 12:30PM - 1:20PM
+E7 5353
+Popl QuinceQu
+16/09/2025 - 16/09/2025
+ 
+ 	
+ 
+MWF 10:30AM - 11:20AM
+E7 5353
+Popl QuinceQu
+27/10/2025 - 02/12/2025
+ 
+ 	
+ 
+T 12:30PM - 1:20PM
+E7 5353
+Popl QuinceQu
+28/10/2025 - 28/10/2025
+ 
+ 	
+ 
+T 12:30PM - 1:20PM
+E7 5353
+Popl QuinceQu
+11/11/2025 - 11/11/2025
+6627
+103
+TUT
+T 2:30PM - 4:20PM
+MC 2035
+To be Announced
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+T 2:30PM - 4:20PM
+MC 2035
+To be Announced
+27/10/2025 - 02/12/2025
+7110
+201
+TST
+T 7:00PM - 8:50PM
+TBA
+To be Announced
+21/10/2025 - 21/10/2025
+MATH 117 - Calculus 1 (Eng)
+Status	Units	Grading	Deadlines
+Enrolled
+0.50
+Numeric Grading Basis
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+6221
+001
+LEC
+MF 11:30AM - 12:20PM
+E7 5353
+Redwoo Sequoia
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+T 9:30AM - 10:20AM
+E7 5353
+Redwoo Sequoia
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+F 4:30PM - 5:20PM
+E7 4053
+Redwoo Sequoia
+05/09/2025 - 05/09/2025
+ 
+ 	
+ 
+Th 1:30PM - 2:20PM
+E7 5353
+Redwoo Sequoia
+25/09/2025 - 25/09/2025
+ 
+ 	
+ 
+Th 1:30PM - 2:20PM
+E7 5353
+Redwoo Sequoia
+09/10/2025 - 09/10/2025
+ 
+ 	
+ 
+MF 11:30AM - 12:20PM
+E7 5353
+Redwoo Sequoia
+27/10/2025 - 02/12/2025
+ 
+ 	
+ 
+T 9:30AM - 10:20AM
+E7 5353
+Redwoo Sequoia
+27/10/2025 - 02/12/2025
+ 
+ 	
+ 
+Th 1:30PM - 2:20PM
+E7 5353
+Redwoo Sequoia
+06/11/2025 - 06/11/2025
+6284
+102
+TUT
+M 2:30PM - 4:20PM
+DWE 1515
+To be Announced
+03/09/2025 - 10/10/2025
+ 
+ 	
+ 
+M 2:30PM - 4:20PM
+DWE 1515
+To be Announced
+27/10/2025 - 02/12/2025
+7112
+201
+TST
+M 8:30AM - 10:20AM
+TBA
+To be Announced
+20/10/2025 - 20/10/2025
+MTHEL 99 - First-Year Math Readiness
+Status	Units	Grading	Deadlines
+Enrolled
+0.00
+Credit / Non-Credit Basis
+Academic Calendar Deadlines
+Class Nbr	Section	Component	Days & Times	Room	Instructor	Start/End Date
+6823
+002
+LEC
+TBA
+ONLN - Online
+Spru Sumac
+03/09/2025 - 02/12/2025
+Printer Friendly Page
+Go to top iconGo to top

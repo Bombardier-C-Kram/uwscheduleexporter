@@ -1,0 +1,9 @@
+RefDateFormat←{
+⍝ 1 if the dates in courses ⍵ are DD/MM/YYYY, 0 if MM/DD/YYYY: whichever reading
+⍝ gives a real date for every one of them (⎕DT rejects 31/02, month 13, ...).
+    d←⊃,/{0=≢⍵.classes:⍬ ⋄ ⊃,/⍵.classes.(start end)}¨⍵
+    mm dd←{∧/(⍵ 0)⎕DT d}¨'MM/DD/YYYY' 'DD/MM/YYYY'     ⍝ ⎕DT validate mode: 1 per real date
+    dd∧mm:'Cannot tell DD/MM from MM/DD'⎕SIGNAL 11
+    dd:1 ⋄ mm:0
+    'Dates are inconsistent or impossible'⎕SIGNAL 11
+}

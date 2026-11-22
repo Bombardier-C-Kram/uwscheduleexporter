@@ -1,0 +1,1 @@
+Unescape←{'\\([\\;,nN])'⎕R{c←⍵ Group 1 ⋄ c∊'nN':'\n' ⋄ c}⊢⍵}

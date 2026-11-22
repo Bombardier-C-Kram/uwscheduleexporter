@@ -1,0 +1,9 @@
+Leaks←{
+⍝ Names in ⍺, and their parts of 3+ characters, that still appear in ⍵
+⍝ as whole words, ignoring case.
+    text←⍵
+    parts←∪⍺,⊃,/{w/⍨2<≢¨w←⍵⊆⍨~⍵∊' -,.'}¨⍺
+    parts←parts/⍨~IsFakeWord¨parts        ⍝ fake by construction
+    parts←parts~' '(≠⊆⊢)FakeStudent
+    parts/⍨{0<≢(('\b\Q',⍵,'\E\b')⎕S 0⍠('IC' 1)('UCP' 1)('Mode' 'D'))text}¨parts
+}

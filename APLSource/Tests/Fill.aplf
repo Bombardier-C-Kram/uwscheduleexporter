@@ -1,0 +1,1 @@
+Fill←{v←⍺ ⋄ ('@code' '@section' '@name' '@type' '@location' '@prof'⎕R{v⊃⍨1+⍵.PatternNum})⍵}

@@ -1,0 +1,4 @@
+∇ r←PoolPlus
+ ⍝ Pool words, then pairs of them in case one paste has more words than Pool
+  r←Pool,,∘.,⍨Pool
+∇

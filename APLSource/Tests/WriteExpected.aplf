@@ -1,0 +1,12 @@
+∇ WriteExpected files;f;t
+ ⍝ Write the expected .json and .events for fixtures ('' = all) from the reference
+ ⍝ model. Never from uwsch/ical: that would make their bugs the expected output.
+ ⍝ Review the diff: these files are the specification the code is tested against.
+  :If 0=≢files ⋄ files←Fixtures ⋄ :EndIf
+  :For f :In ⊆files
+      t←ReadRaw f
+      (RefDump t)WriteRaw(¯4↓f),'.json'
+      (Lines RefEvents t)WriteRaw(¯4↓f),'.events'
+  :EndFor
+  Say'Wrote expected files for ',(⍕≢⊆files),' fixture(s). Review with: git diff tests/fixtures'
+∇

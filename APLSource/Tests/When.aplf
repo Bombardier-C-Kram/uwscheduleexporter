@@ -1,0 +1,1 @@
+When←{Lines{⍵[⍋⍵]}26↑¨⍵⊆⍨⍵≠LF}                  ⍝ just 'YYYY-MM-DD Ddd HH:MM-HH:MM' of each
