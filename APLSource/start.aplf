@@ -1,23 +1,25 @@
  ∇ start
  ⍝ Starts the web server for the UW Schedule Exporter application
  ⍝
- ⍝ This function initializes and starts a Jarvis web server on port 8080
+ ⍝ This function initializes and starts a Jarvis web server on port 8111
  ⍝ with the following configuration:
- ⍝ - Port: 8080
- ⍝ - Namespace: web (contains request handlers)
+ ⍝ - Port: 8111
+ ⍝ - Namespace: web (request handlers; POST /ProcessSchedule)
  ⍝ - Payload format: JSON
- ⍝ - Default page: Index function in web namespace
+ ⍝ - Static files (the page, robots.txt, sitemap.xml, favicon) from the site/
+ ⍝   folder under the current directory, so run it from the repository root
+ ⍝   (or /app in the Docker image)
  ⍝ - Allows both GET and POST requests
  ⍝
  ⍝ Global variables created:
  ⍝ - JSrv: Jarvis server instance for later control (stop, restart, etc.)
  ⍝
  ⍝ Usage: start
- ⍝ After running, the web interface will be available at http://localhost:8080
+ ⍝ After running, the web interface will be available at http://localhost:8111
       JSrv←Jarvis.New(8111 web'JSON')
       JSrv.DYALOG_JARVIS_THREAD←'0'
       JSrv.Debug←0
-      JSrv.HTMLInterface←'' 'Index'
+      JSrv.HTMLInterface←(⊃1 ⎕NPARTS''),'site/'
       JSrv.AllowGETs←1
       JSrv.AllowPOSTs←1
       JSrv.Start

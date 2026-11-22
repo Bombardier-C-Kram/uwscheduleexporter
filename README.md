@@ -1,39 +1,52 @@
 # UW Schedule Exporter
 
-A web-based application built in Dyalog APL that converts University of Waterloo Quest class schedules into iCalendar (.ics) format for import into calendar applications.
+Turn your University of Waterloo Quest class schedule into a calendar file (`.ics`) for Google Calendar,
+Outlook, Apple Calendar or any other calendar app. Paste the Class Schedule page from Quest, download the
+file, import it. Each class becomes a weekly event in Toronto time, with titles and descriptions you can
+customize.
+
+- **Use it:** <https://uw.bkaw.ca/>
+- **Source:** <https://github.com/Bombardier-C-Kram/uwscheduleexporter>
+- **Made by** Holden Hoover, in [Dyalog APL](https://www.dyalog.com/) with the [Jarvis](https://github.com/Dyalog/Jarvis) web service framework
+- **License:** MIT (see `LICENSE.txt`)
+
+Not affiliated with or endorsed by the University of Waterloo. The app doesn't store the schedules it converts.
 
 ## Quick Start
 
-1. **Start the Server**:
+1. **Start the server** from the repository root (it serves the page from `site/`):
    ```apl
    start
    ```
-   This starts a web server on `http://localhost:8080`
+   or with Docker: `docker compose up --build`. Either way it listens on `http://localhost:8111`.
 
-2. **Access the Web Interface**:
-   Open your browser and navigate to `http://localhost:8080`
-
-3. **Export Your Schedule**:
-   - Login to [UW Quest](https://quest.pecs.uwaterloo.ca/psp/SS/?cmd=login)
-   - Navigate to your Class Schedule
-   - Select all content (Ctrl+A) and copy (Ctrl+C)
-   - Paste into the web form
-   - Customize templates if desired
-   - Click "Process Schedule" to download your .ics file
+2. **Export your schedule**:
+   - Sign in to [Quest](https://quest.pecs.uwaterloo.ca/psp/SS/?cmd=login) and open **Class Schedule** in **List View**
+   - Select the whole page (Ctrl+A / ⌘A) and copy it (Ctrl+C / ⌘C)
+   - Paste it into the page and click **Download calendar**
+   - Import the downloaded `.ics` file into your calendar app
 
 ## Project Structure
 
 ```
 uwscheduleexporter/
 ├── APLSource/
-│   ├── web.apln      # Web interface
-│   ├── start.aplf    # Server startup function
-│   ├── uwsch.aplf    # UW Quest schedule parser
-│   ├── ical.aplf     # iCalendar format generator
-│   └── save.aplf     # File saving utility
-├── deps/             # Dependencies (Jarvis web server)
-├── cider.config      # Cider project configuration
-└── README.md         # This file
+│   ├── web.apln             # HTTP handler: POST /ProcessSchedule
+│   ├── start.aplf           # Server startup function
+│   ├── uwsch.aplf           # UW Quest schedule parser
+│   ├── detectDateFormat.aplf # DD/MM vs MM/DD detection
+│   ├── ical.aplf            # iCalendar (RFC 5545) generator
+│   ├── save.aplf            # File saving utility
+│   ├── testuwsch.aplf       # Test entry point (runs Tests.Run)
+│   └── Tests/               # Test suite and fixture tooling, one function per file
+├── site/                    # Static files served by Jarvis
+│   ├── index.html           # The web page (HTML, CSS and JavaScript)
+│   ├── robots.txt, sitemap.xml, favicon.svg
+├── tests/fixtures/          # Anonymised Quest pastes with expected results
+├── deps/                    # Dependencies (Jarvis web server)
+├── test.apls                # Run the tests from the command line
+├── cider.config             # Cider project configuration
+└── README.md                # This file
 ```
 
 ## Functions Reference
@@ -41,22 +54,22 @@ uwscheduleexporter/
 ### Core Functions
 
 #### `start`
-Initializes and starts the Jarvis web server on port 8080.
+Starts the Jarvis web server on port 8111, serving `site/` (relative to the current directory) and the `web` handlers.
 - **Global Variables Created**: `JSrv` (server instance)
 - **Usage**: `start`
 
 #### `uwsch schedule`
 Parses raw UW Quest schedule text into structured data.
 - **Args**: `schedule` - Character vector of schedule text
-- **Returns**: Vector of course namespaces with class details
-- **Usage**: `courses ← uwsch scheduleText`
+- **Returns**: `courses dateFormat`: a vector of course namespaces with class details, and 1 if the dates are DD/MM/YYYY (0 if MM/DD/YYYY)
+- **Usage**: `(courses dateFormat) ← uwsch scheduleText`
 
-#### `summary description ical courses`
-Generates iCalendar format from structured course data.
-- **Left Args**: Two-element vector `[summary, description]` with template strings
-- **Right Arg**: `courses` - Vector of course namespaces from `uwsch`
-- **Returns**: Complete iCalendar file content
-- **Usage**: `icalContent ← ('Event Title' 'Event Description') ical courses`
+#### `summary description dateFormat ical courses`
+Generates an iCalendar file from structured course data.
+- **Left Args**: `summary description dateFormat`: the two template strings and the date format from `uwsch`
+- **Right Arg**: `courses` - Vector of course namespaces from `uwsch` (not modified)
+- **Returns**: Complete iCalendar file content (CRLF line endings; `DTSTAMP` is the time of the call)
+- **Usage**: `icalContent ← ('Event Title' 'Event Description' dateFormat) ical courses`
 
 #### `save content`
 Saves content to 'uwclasses.ics' file. For debug/local purposes.
@@ -65,15 +78,11 @@ Saves content to 'uwclasses.ics' file. For debug/local purposes.
 
 ### Web Interface Functions
 
-#### `web.Index req`
-HTTP GET handler for the main application page.
-- **Args**: `req` - HTTP request object
-- **Returns**: HTML content for the web interface
-
 #### `req web.ProcessSchedule`
-HTTP POST handler for processing schedule data.
-- **Args**: `req` - HTTP request with JSON payload
-- **Returns**: iCalendar file content with download headers
+HTTP POST handler used by the page.
+- **Args**: `req` - HTTP request with JSON payload `{schedule, summary, description}`
+- **Returns**: the iCalendar file (`text/calendar`). If the schedule can't be read, a short plain-text
+  explanation with status 400 (no dates, or dates in mixed or impossible formats) or 500 (anything else).
 
 ## Template Variables
 

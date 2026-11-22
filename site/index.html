@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UW Schedule Exporter: Quest class schedule to calendar (.ics)</title>
+  <meta name="description" content="Export your University of Waterloo Quest class schedule to Google Calendar, Outlook or Apple Calendar as an .ics file. Free, open source, no sign-in.">
+  <meta name="author" content="Holden Hoover">
+  <link rel="canonical" href="https://uw.bkaw.ca/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#2f5fb3">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UW Schedule Exporter">
+  <meta property="og:title" content="UW Schedule Exporter: Quest class schedule to calendar">
+  <meta property="og:description" content="Turn your University of Waterloo Quest class schedule into an .ics file for Google Calendar, Outlook or Apple Calendar.">
+  <meta property="og:url" content="https://uw.bkaw.ca/">
+  <meta name="twitter:card" content="summary">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "UW Schedule Exporter",
+    "url": "https://uw.bkaw.ca/",
+    "description": "Exports a University of Waterloo Quest class schedule to an iCalendar (.ics) file for Google Calendar, Outlook, Apple Calendar and other calendar apps.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
+    "author": { "@type": "Person", "name": "Holden Hoover" },
+    "license": "https://opensource.org/licenses/MIT",
+    "isBasedOn": {
+      "@type": "SoftwareSourceCode",
+      "codeRepository": "https://github.com/Bombardier-C-Kram/uwscheduleexporter",
+      "programmingLanguage": "APL"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --surface-alt: #eef2fa;
+      --text: #1c2433;
+      --muted: #5a6478;
+      --border: #d5dbe8;
+      --accent: #2f5fb3;
+      --accent-hover: #244c92;
+      --accent-text: #ffffff;
+      --ok-bg: #e5f4ea; --ok-text: #1d5b32;
+      --err-bg: #fbe9e9; --err-text: #8a1f1f;
+      --info-bg: #e8eefb; --info-text: #23417a;
+      --radius: 10px;
+      --focus: 0 0 0 3px rgba(47, 95, 179, 0.45);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #11151d;
+        --surface: #1a202b;
+        --surface-alt: #222a37;
+        --text: #e6e9f0;
+        --muted: #a2abbd;
+        --border: #333d4e;
+        --accent: #7aa2ff;
+        --accent-hover: #9bb8ff;
+        --accent-text: #0d1320;
+        --ok-bg: #173323; --ok-text: #9fdcb2;
+        --err-bg: #3a1c1c; --err-text: #f2b1b1;
+        --info-bg: #1c2742; --info-text: #b5c8f5;
+        --focus: 0 0 0 3px rgba(122, 162, 255, 0.5);
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    a { color: var(--accent); }
+    a:hover { color: var(--accent-hover); }
+    .wrap { max-width: 780px; margin: 0 auto; padding: 32px 16px 48px; }
+    header h1 { margin: 0 0 6px; font-size: clamp(1.6rem, 1.2rem + 2vw, 2.2rem); line-height: 1.2; }
+    header .lead { margin: 0 0 12px; color: var(--muted); font-size: 1.05rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .tags li { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 999px; padding: 2px 12px; font-size: 0.85rem; color: var(--muted); }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-top: 24px; }
+    h2 { font-size: 1.25rem; margin: 0 0 12px; }
+    ol.steps { margin: 0 0 20px; padding-left: 1.3em; }
+    ol.steps li { margin-bottom: 6px; }
+    kbd { font: 0.85em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--surface-alt); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; }
+    .hint { color: var(--muted); font-size: 0.9rem; margin: 4px 0 0; }
+    textarea, input[type="text"] {
+      width: 100%;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font: 0.9rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    textarea { height: 220px; resize: vertical; }
+    textarea:focus, input:focus, button:focus-visible, summary:focus-visible, a:focus-visible { outline: none; box-shadow: var(--focus); }
+    details.templates { margin: 18px 0; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-alt); }
+    details.templates > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; border-radius: 8px; }
+    details.templates .body { padding: 4px 14px 14px; }
+    .field { margin-top: 12px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .chip {
+      font: 0.85rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; cursor: pointer;
+    }
+    .chip:hover { border-color: var(--accent); }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+    button.primary {
+      background: var(--accent); color: var(--accent-text);
+      border: 0; border-radius: 8px; padding: 12px 22px;
+      font: 600 1rem system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; cursor: pointer;
+    }
+    button.primary:hover { background: var(--accent-hover); }
+    button.primary[disabled] { opacity: 0.6; cursor: progress; }
+    button.link { background: none; border: 0; padding: 0; color: var(--accent); font: inherit; font-size: 0.9rem; cursor: pointer; text-decoration: underline; }
+    .status { margin-top: 16px; padding: 12px 14px; border-radius: 8px; }
+    .status:empty { display: none; }
+    .status.info { background: var(--info-bg); color: var(--info-text); }
+    .status.ok { background: var(--ok-bg); color: var(--ok-text); }
+    .status.error { background: var(--err-bg); color: var(--err-text); }
+    .status a { color: inherit; font-weight: 600; }
+    .apps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+    .apps section { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+    .apps h3 { margin: 0 0 6px; font-size: 1rem; }
+    .apps p { margin: 0; font-size: 0.93rem; }
+    .faq details { border-top: 1px solid var(--border); padding: 10px 0; }
+    .faq details:first-of-type { border-top: 0; }
+    .faq summary { cursor: pointer; font-weight: 600; }
+    .faq p { margin: 8px 0 0; color: var(--muted); }
+    footer { margin-top: 28px; color: var(--muted); font-size: 0.9rem; text-align: center; }
+    footer p { margin: 4px 0; }
+    @media (prefers-reduced-motion: no-preference) { button, .chip { transition: background-color .15s, border-color .15s; } }
+    @media (max-width: 480px) { .card { padding: 18px 14px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>UW Schedule Exporter</h1>
+      <p class="lead">Turn your University of Waterloo Quest class schedule into a calendar file (.ics) for Google Calendar, Outlook, Apple Calendar or any calendar app.</p>
+    </header>
+
+    <main>
+      <section class="card" aria-labelledby="export-heading">
+        <h2 id="export-heading">Export your schedule</h2>
+        <ol class="steps">
+          <li>Sign in to <a href="https://quest.pecs.uwaterloo.ca/psp/SS/?cmd=login" target="_blank" rel="noopener">Quest</a> and open <strong>Class Schedule</strong>.</li>
+          <li>Make sure <strong>List View</strong> is selected, then select the whole page (<kbd>Ctrl</kbd>+<kbd>A</kbd>, or <kbd>⌘</kbd>+<kbd>A</kbd> on a Mac) and copy it (<kbd>Ctrl</kbd>+<kbd>C</kbd> / <kbd>⌘</kbd>+<kbd>C</kbd>).</li>
+          <li>Paste it below and click <strong>Download calendar</strong>.</li>
+          <li>Import the file into your calendar app (<a href="#import">how</a>).</li>
+        </ol>
+
+        <form id="scheduleForm" novalidate>
+          <label for="schedule">Your Quest class schedule</label>
+          <textarea id="schedule" name="schedule" spellcheck="false" autocomplete="off" aria-describedby="schedule-hint"
+            placeholder="Paste the whole Class Schedule page here…"></textarea>
+          <p class="hint" id="schedule-hint">Paste everything; the exporter finds the classes itself. Classes without a set time (for example online ones) are left out.</p>
+
+          <details class="templates">
+            <summary>Customize event titles and descriptions</summary>
+            <div class="body">
+              <div class="field">
+                <label for="summary">Event title</label>
+                <input type="text" id="summary" name="summary" spellcheck="false" autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="description">Event description</label>
+                <input type="text" id="description" name="description" spellcheck="false" autocomplete="off">
+              </div>
+              <p class="hint">Click a variable to add it to the field you were last in:</p>
+              <div class="chips" role="group" aria-label="Template variables">
+                <button type="button" class="chip" data-var="@code" title="Course code, e.g. ECE 150">@code</button>
+                <button type="button" class="chip" data-var="@section" title="Section, e.g. 001">@section</button>
+                <button type="button" class="chip" data-var="@name" title="Course name">@name</button>
+                <button type="button" class="chip" data-var="@type" title="Component: LEC, TUT, LAB, ...">@type</button>
+                <button type="button" class="chip" data-var="@location" title="Room, e.g. DC 1350">@location</button>
+                <button type="button" class="chip" data-var="@prof" title="Instructor">@prof</button>
+              </div>
+              <p class="hint"><button type="button" class="link" id="resetTemplates">Reset to defaults</button></p>
+            </div>
+          </details>
+
+          <div class="actions">
+            <button type="submit" class="primary" id="submitButton">Download calendar</button>
+            <span class="hint">or press <kbd>Ctrl</kbd>+<kbd>Enter</kbd></span>
+          </div>
+          <div id="status" class="status" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+
+      <section class="card" id="import" aria-labelledby="import-heading">
+        <h2 id="import-heading">Import into your calendar</h2>
+        <p class="hint" style="margin:0 0 14px">Tip: create a new calendar for the term first and import into that, so you can remove everything at once if needed.</p>
+        <div class="apps">
+          <section>
+            <h3>Google Calendar</h3>
+            <p>On a computer, open Settings, choose <strong>Import &amp; export</strong>, select the downloaded file and the calendar to add it to, then click <strong>Import</strong>.</p>
+          </section>
+          <section>
+            <h3>Outlook</h3>
+            <p>In the calendar, choose <strong>Add calendar</strong>, then <strong>Upload from file</strong>, and pick the downloaded file.</p>
+          </section>
+          <section>
+            <h3>Apple Calendar</h3>
+            <p>On a Mac, choose <strong>File › Import</strong>. On iPhone or iPad, open the downloaded file and tap <strong>Add All</strong>.</p>
+          </section>
+        </div>
+      </section>
+
+      <section class="card faq" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">Questions</h2>
+        <details>
+          <summary>Is my schedule stored anywhere?</summary>
+          <p>No. Your schedule is sent to the server only to build the calendar file, which comes straight back to your browser. The app doesn't save it. Your template settings are remembered in your own browser.</p>
+        </details>
+        <details>
+          <summary>Which calendar apps does it work with?</summary>
+          <p>Any app that can import an iCalendar (.ics) file, including Google Calendar, Outlook, Apple Calendar and Thunderbird. Classes repeat weekly in Toronto time until their end date.</p>
+        </details>
+        <details>
+          <summary>Why are some classes missing?</summary>
+          <p>Classes with no scheduled time in Quest (shown as TBA, for example online classes) can't be placed on a calendar, so they're left out.</p>
+        </details>
+        <details>
+          <summary>It didn't work. What can I do?</summary>
+          <p>Make sure you copied the whole Class Schedule page in List View. If it still fails, please <a href="https://github.com/Bombardier-C-Kram/uwscheduleexporter/issues/new?template=export-error.yml" target="_blank" rel="noopener">report the problem on GitHub</a>. Don't paste your schedule into a public issue; the form explains how to send it privately.</p>
+        </details>
+        <details>
+          <summary>Is this an official University of Waterloo tool?</summary>
+          <p>No. It's an independent, open-source project, not affiliated with or endorsed by the University of Waterloo.</p>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      <p>Made by Holden Hoover · <a href="https://github.com/Bombardier-C-Kram/uwscheduleexporter">Source code on GitHub</a> · MIT License</p>
+      <p>Written in <a href="https://www.dyalog.com/">Dyalog APL</a>. Not affiliated with the University of Waterloo.</p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+      var DEFAULTS = {
+        summary: "@code @type in @location",
+        description: "@code-@section: @name (@type) in @location with @prof"
+      };
+      var STORE_KEY = "uwse.templates";
+      var form = document.getElementById("scheduleForm");
+      var scheduleBox = document.getElementById("schedule");
+      var summaryBox = document.getElementById("summary");
+      var descriptionBox = document.getElementById("description");
+      var statusBox = document.getElementById("status");
+      var submitButton = document.getElementById("submitButton");
+      var lastTemplateBox = summaryBox;
+
+      function loadTemplates() {
+        var saved = null;
+        try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null"); } catch (e) { saved = null; }
+        summaryBox.value = (saved && typeof saved.summary === "string") ? saved.summary : DEFAULTS.summary;
+        descriptionBox.value = (saved && typeof saved.description === "string") ? saved.description : DEFAULTS.description;
+      }
+      function saveTemplates() {
+        try {
+          localStorage.setItem(STORE_KEY, JSON.stringify({ summary: summaryBox.value, description: descriptionBox.value }));
+        } catch (e) { /* storage unavailable: templates just aren't remembered */ }
+      }
+      function showStatus(kind, message, link) {
+        statusBox.className = "status " + kind;
+        statusBox.textContent = message;
+        if (link) {
+          statusBox.appendChild(document.createTextNode(" "));
+          var a = document.createElement("a");
+          a.href = link.href; a.textContent = link.text;
+          if (/^https?:/.test(link.href)) { a.target = "_blank"; a.rel = "noopener"; }
+          statusBox.appendChild(a);
+        }
+      }
+      function fileNameFor(schedule) {
+        var m = /\b(Winter|Spring|Fall)\s+(\d{4})\b/.exec(schedule);
+        return m ? "uw-" + m[1].toLowerCase() + "-" + m[2] + ".ics" : "uw-schedule.ics";
+      }
+      function download(text, name) {
+        var url = URL.createObjectURL(new Blob([text], { type: "text/calendar;charset=utf-8" }));
+        var a = document.createElement("a");
+        a.href = url; a.download = name; a.style.display = "none";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      }
+
+      [summaryBox, descriptionBox].forEach(function (box) {
+        box.addEventListener("focus", function () { lastTemplateBox = box; });
+        box.addEventListener("input", saveTemplates);
+      });
+      document.querySelectorAll(".chip").forEach(function (chip) {
+        chip.addEventListener("click", function () {
+          var box = lastTemplateBox, v = chip.getAttribute("data-var");
+          var start = box.selectionStart == null ? box.value.length : box.selectionStart;
+          var end = box.selectionEnd == null ? box.value.length : box.selectionEnd;
+          box.value = box.value.slice(0, start) + v + box.value.slice(end);
+          box.focus();
+          box.setSelectionRange(start + v.length, start + v.length);
+          saveTemplates();
+        });
+      });
+      document.getElementById("resetTemplates").addEventListener("click", function () {
+        summaryBox.value = DEFAULTS.summary;
+        descriptionBox.value = DEFAULTS.description;
+        saveTemplates();
+      });
+      scheduleBox.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); form.requestSubmit ? form.requestSubmit() : form.submit(); }
+      });
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        var schedule = scheduleBox.value;
+        if (!schedule.trim()) {
+          showStatus("error", "Paste your Quest class schedule first.");
+          scheduleBox.focus();
+          return;
+        }
+        submitButton.disabled = true;
+        showStatus("info", "Converting your schedule…");
+        try {
+          var response = await fetch("/ProcessSchedule", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ schedule: schedule, summary: summaryBox.value, description: descriptionBox.value })
+          });
+          var text = await response.text();
+          if (!response.ok) {
+            var isMessage = (response.headers.get("Content-Type") || "").indexOf("text/plain") === 0 && text.length < 500;
+            showStatus("error", isMessage ? text : "Something went wrong on the server (" + response.status + ").",
+              { href: "https://github.com/Bombardier-C-Kram/uwscheduleexporter/issues/new?template=export-error.yml", text: "Report a problem" });
+            return;
+          }
+          var count = (text.match(/BEGIN:VEVENT/g) || []).length;
+          if (count === 0) {
+            showStatus("error", "No classes with set times were found in what you pasted. Make sure you copied the whole Class Schedule page in List View.");
+            return;
+          }
+          var name = fileNameFor(schedule);
+          download(text, name);
+          showStatus("ok", "Downloaded " + name + " with " + count + " recurring " + (count === 1 ? "event" : "events") + ". Now import it into your calendar.",
+            { href: "#import", text: "How to import" });
+        } catch (err) {
+          showStatus("error", "Couldn't reach the server. Check your connection and try again.");
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+
+      loadTemplates();
+    })();
+  </script>
+</body>
+</html>
